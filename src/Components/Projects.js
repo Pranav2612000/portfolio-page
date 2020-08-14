@@ -326,6 +326,9 @@ function Projects() {
           </section>
         </section>
 
+        <br/>
+        <p> See more Projects <a href="https://github.com/Pranav2612000?tab=repositories"> here </a></p>
+        <br/>
       </div>
     </div>
   )
