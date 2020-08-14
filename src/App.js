@@ -11,6 +11,7 @@ import Contact from './Components/Contact';
 import Footer from './Components/Footer';
 import Skills from './Components/Skills';
 import Resume from './Components/Resume';
+import Life from './Components/Life';
 
 class App extends React.Component {
   constructor(props) {
@@ -44,6 +45,7 @@ class App extends React.Component {
           <About />
           <Skills />
           <Projects />
+          <Life mode={this.state.mode}/>
           <Resume />
           <Contact />
         </div>

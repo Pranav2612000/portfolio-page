@@ -11,7 +11,7 @@ function Resume() {
 
         <div className="resume-icon-wrapper">
           <a href="https://drive.google.com/file/d/1YiTqkkIKQZ-vsuaFvFpYUnnVbs5oJqKh/view?usp=sharing" target="_blank" rel="noopener noreferrer">
-          <i className="fas fa-file-pdf" title="sinara resume"></i>
+          <i className="fas fa-file-pdf" title="pranav resume"></i>
           </a>
         </div>
 
