@@ -362,7 +362,6 @@ h3 {
 /* PROJECTS SECTION  */
 
 .project-image > a > img {
-  width: 18em;
   box-shadow: 0.2em 0.2em 0.2em 0.1em rgba(0,0,0,.2);
   outline: 0.1em solid rgba(73, 103, 139, 0.1);
   margin: 1em;
@@ -543,6 +542,74 @@ footer a:hover, .top-sign a:hover {
   fill: #6284be;
 }
 
+.vertical-timeline-element-content {
+  border: 2px solid black;
+}
+.light .vertical-timeline-element-content-arrow {
+  border-right-color: black;
+}
+.light.vertical-timeline.vertical-timeline--two-columns::before{
+  background-color: black;
+}
+.light .vertical-timeline-element-icon {
+  box-shadow: 0 0 0 4px #000,inset 0 2px 0 rgba(0,0,0,.08),0 3px 0 4px rgba(0,0,0,.05);
+}
+
+.code-box {
+  text-align: left;
+  line-height: initial;
+  text-transform: none;
+  padding: 1.25rem 1.5rem;
+  background-color: #f0f0e8;
+  border-radius: 8px;
+  letter-spacing: 0px;
+  margin:auto;
+  max-width: max-content;
+}
+.code-box pre {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.code-box pre code {
+  font-family: $code-font;
+  color: #555;
+}
+.code-box pre code .const {
+  color: #6dbba8;
+}
+.code-box pre code .colon {
+  color: #6dbba8;
+}
+.code-box pre code .equals {
+  color: #559484;
+}
+.code-box pre code .const-name {
+  color: #6d648b;
+}
+.code-box pre code .property{
+  color: #fca202;
+}
+.code-box pre code .string {
+  color: #b4a39c;
+}
+.social-icons {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+.social-icons svg {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.single-project img.large{
+  height: 400px;
+  width: 550px;
+}
+.single-project img.small{
+  height: 200px;
+  width: 250px;
+}
 
 /* SMALL SCREEN */
 @media only screen and (max-width: 769px) {
