@@ -10,7 +10,7 @@ function Resume() {
         </div>
 
         <div className="resume-icon-wrapper">
-          <a href="https://drive.google.com/file/d/1YiTqkkIKQZ-vsuaFvFpYUnnVbs5oJqKh/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <a href="https://drive.google.com/file/d/1li1Skb0wBaFZz2nlGpG1vZwnknPQc1ZA/view?usp=sharing" target="_blank" rel="noopener noreferrer">
           <i className="fas fa-file-pdf" title="pranav resume"></i>
           </a>
         </div>
