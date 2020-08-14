@@ -15,6 +15,7 @@ function About() {
           <div className="about-pranav-summary">
             <p>Software Engineer | Full Stack Developer | Cyber Security Enthusiast </p>
 
+
             <p> I am an undergraduate student, pursuing Bachelors in Information Technology at College of Engineering, Pune. I was introduced to the fabulous world of programming at the age of 13 through Scratch,(where I created my first game) and since then it has always fascinated me. Since then, for the past 9 years, I have learnt many new languages and technologies and worked on various projects. For me, writing code is like solving a puzzle - You have different pieces(the language syntax) and you need to put these pieces together correctly to solve the problem. And hey, I am a vim guy, in the age of IDEs, with only a Linux OS(No windows on dual boot!).
             </p>
 
