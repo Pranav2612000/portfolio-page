@@ -1,6 +1,5 @@
 import React from 'react';
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
-import ima from '../assets/project-ima.jpeg';
 import 'react-vertical-timeline-component/style.min.css';
 const Life  = (props) => {
   var mode_class;
@@ -75,7 +74,7 @@ const Life  = (props) => {
             <h3 className="vertical-timeline-element-title">Zulip - OpenSource Contributor</h3>
             <h4 className="vertical-timeline-element-subtitle">Remote</h4>
             <p>
-              Contributed around 15 <a href="">PRs</a>(10 + merged) to the platform, PRs consisted of tests and bug fixes.
+              Contributed around 15 <a href="https://github.com/zulip/zulip/pulls?q=author%3APranav2612000+">PRs</a>(10 + merged) to the platform, PRs consisted of tests and bug fixes.
             </p>
             <p>
               Worked on alternate designs to improve UI/UX of the pages.
