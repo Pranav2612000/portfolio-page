@@ -82,7 +82,7 @@ const Life  = (props) => {
           </VerticalTimelineElement>
           <VerticalTimelineElement
             className={"vertical-timeline-element--work " + mode_class}
-            date="2002 - 2006"
+            date="2017 - Present"
             iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
           >
             <h3 className="vertical-timeline-element-title">Technical Lead - Software Development Section</h3>
