@@ -11,7 +11,7 @@ const Life  = (props) => {
   return (
     <div id="life" className="setion-wrapper">
       <div>
-        <h3> Life </h3>
+        <h1 className="section-title"> Life </h1>
       </div>
       <br/>
       <div>

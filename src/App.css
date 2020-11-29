@@ -58,6 +58,16 @@ h3 {
   color: #6284be;
 }
 
+.section-title {
+  text-align: center;
+  padding-top: 1em;
+  padding-bottom: 0.5em;
+  letter-spacing: .07em;
+  font-size: 1.8em;
+  font-weight: 300;
+  color: #6284be;
+}
+
 /* NAVIGATION */
 
 .nav {

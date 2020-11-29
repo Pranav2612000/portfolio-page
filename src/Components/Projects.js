@@ -13,7 +13,7 @@ function Projects() {
     <div id="projects" className="section-wrapper">
       <div className="projects-wrapper">
 
-        <h3>Projects</h3>
+        <h1 className="section-title">Projects</h1>
 
         <section className="single-project">
           <section className="single-project-left">

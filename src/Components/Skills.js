@@ -4,7 +4,7 @@ function Skills() {
   return (
     <div id="skills" className="section-wrapper">
       <div className="skills-inner-wrapper">
-        <h3>Skills</h3>
+        <h1 className="section-title">Skills</h1>
         <div className="development-icons">
           <div>
             <i className="devicon-c-plain"></i>
