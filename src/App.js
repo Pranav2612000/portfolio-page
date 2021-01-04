@@ -15,20 +15,29 @@ import Life from './Components/Life';
 
 class App extends React.Component {
   constructor(props) {
+    const windowGlobal = typeof window !== 'undefined' && window;
     super(props)
-    this.state = {
-      mode: JSON.parse(localStorage.getItem("Mode"))
+    if(typeof window !== 'undefined') {
+      this.state = {
+        mode: JSON.parse(localStorage.getItem("Mode"))
+      }
+    } else {
+      
+      this.state = {
+        mode: false
+      }
     }
   }
 
   handleMode = () => {
-    if (JSON.parse(localStorage.getItem("Mode")) === true) {
+    const windowGlobal = typeof window !== 'undefined' && window;
+    if (JSON.parse(windowGlobal.localStorage.getItem("Mode")) === true) {
       this.setState({ mode: false }, () => {
-        localStorage.setItem("Mode", JSON.stringify(false));
+        windowGlobal.localStorage.setItem("Mode", JSON.stringify(false));
       })
     } else {
       this.setState({ mode: true }, () => {
-        localStorage.setItem("Mode", JSON.stringify(true));
+        windowGlobal.localStorage.setItem("Mode", JSON.stringify(true));
       })
     }
   }
