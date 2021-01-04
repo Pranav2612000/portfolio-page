@@ -1,4 +1,9 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faMoon,
+  faSun,
+} from '@fortawesome/free-solid-svg-icons';
 
 function Nav(props) {
   return (
@@ -8,9 +13,9 @@ function Nav(props) {
         <a href="/#home">Pranav</a>
         <div className="btn-mode" title="light or dark mode">
           <div className={props.mode ? "btn-icons btn-icons-dark" : "btn-icons"} onClick={props.handleMode}>
-            <i className="fas fa-moon"></i>
+            <FontAwesomeIcon icon={faMoon} size="1x"/>
             <div className={props.mode ? "btn-circle-new btn-circle" : "btn-circle"}></div>
-            <i className="fas fa-sun"></i>
+            <FontAwesomeIcon icon={faSun} size="1x"/>
           </div>
         </div>
       </ul>
