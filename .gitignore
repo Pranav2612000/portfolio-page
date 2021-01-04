@@ -1,6 +1,7 @@
-# Build directory and public directory for gatsby
+# Build directory and public, .cache directories for gatsby
 build/
 public/
+.cache/
 
 
 # Logs
