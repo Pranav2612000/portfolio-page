@@ -1,4 +1,8 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faFilePdf
+} from '@fortawesome/free-solid-svg-icons';
 
 function Resume() {
   return (
@@ -10,8 +14,8 @@ function Resume() {
         </div>
 
         <div className="resume-icon-wrapper">
-          <a href="https://drive.google.com/file/d/1li1Skb0wBaFZz2nlGpG1vZwnknPQc1ZA/view?usp=sharing" target="_blank" rel="noopener noreferrer">
-          <i className="fas fa-file-pdf" title="pranav resume"></i>
+          <a href="https://drive.google.com/file/d/1ovnlPSFNjhN6-vKRID7cKlbE5cQcnIt0/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faFilePdf} size="2x"/>
           </a>
         </div>
 
