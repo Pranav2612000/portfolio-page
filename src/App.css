@@ -95,12 +95,19 @@ h3 {
   width: 100%;
   overflow: hidden;
   box-sizing: border-box;
-  background: rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.6);
   box-shadow: 0 0.3em 0.5em -0.1em rgba(0, 0, 0, 0.2);
+}
+.nav:hover {
+  background: rgb(255,255,255,1);
 }
 
 .dark-nav {
-  background:  rgb(39, 39, 51)
+  background:  rgb(39, 39, 51, 0.8)
+}
+.dark-nav:hover {
+  background:  rgb(39, 39, 51, 1)
+
 }
 
 .logo-nav, .ul-nav {
@@ -623,11 +630,6 @@ footer a:hover, .top-sign a:hover {
 
 .social-media-icons a svg:hover {
   fill: #6284be;
-}
-
-.development-icons svg:hover {
-  fill: #6284be;
-  transition: 0.5s ease-in-out;
 }
 
 .vertical-timeline-element-content {
