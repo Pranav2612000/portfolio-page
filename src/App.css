@@ -37,6 +37,12 @@ html {
   flex: 1;
 }
 
+.page-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: justify;
+  padding: 12vw 10vw 4vw 10vw;
+}
 .section-wrapper {
   display: flex;
   justify-content: space-evenly;
@@ -618,6 +624,10 @@ footer a:hover, .top-sign a:hover {
 .single-project img.small{
   height: 200px;
   width: 250px;
+}
+
+.top-sign a {
+  cursor: pointer;
 }
 
 /* SMALL SCREEN */
