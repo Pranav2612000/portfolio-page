@@ -22,6 +22,15 @@ html {
   background-color: rgb(38, 38, 45);
 }
 
+.dark-icon {
+  background-color: white;
+  border-radius: 20px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
 @keyframes fadein {
   from { opacity: 0}
   to   { opacity: 1}
@@ -556,6 +565,11 @@ footer a:hover, .top-sign a:hover {
 
 .social-media-icons a svg:hover {
   fill: #6284be;
+}
+
+.development-icons svg:hover {
+  fill: #6284be;
+  transition: 0.5s ease-in-out;
 }
 
 .vertical-timeline-element-content {
