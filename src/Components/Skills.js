@@ -85,7 +85,7 @@ function Skills() {
           </div>
 
           <div>
-              <img src={nextJSImg} height="80" width="80" className="dark-icon"/>
+              <img src={nextJSImg} height="80" width="80" className="dark-icon" alt={"nextJS"}/>
               <p>NextJS</p>
           </div>
 
@@ -167,12 +167,12 @@ function Skills() {
           </div>
 
           <div>
-              <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" height="80" width="80" />
+              <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" height="80" width="80" alt="AWS icon"/>
               <p>Aws</p>
           </div>
 
           <div>
-              <img src="https://www.vectorlogo.zone/logos/electronjs/electronjs-icon.svg" height="80" width="80" />
+              <img src="https://www.vectorlogo.zone/logos/electronjs/electronjs-icon.svg" height="80" width="80" alt="electron icon"/>
               <p>Electron</p>
           </div>
 

@@ -9,7 +9,10 @@ module.exports = {
         ],
         display: 'swap',
       }
-    }
+    },
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`
   ],
   flags: {
     THE_FLAG: false,

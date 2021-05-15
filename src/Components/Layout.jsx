@@ -4,7 +4,7 @@ import Helmet from 'react-helmet'
 import Nav from './Nav';
 import Hamburger from './Hamburger';
 import Footer from './Footer';
-import mugShot from "../assets/Mugshot.jpg";
+import mugShot from "../assets/Mugshot.jpeg";
 import '../index.css';
 import '../App.css';
 
@@ -52,7 +52,7 @@ class Layout extends React.Component {
                 <meta property="og:title" content="Pranav Joglekar | Portfolio"/>
                 <meta property="og:description" content="Pranav Joglekar's portfolio and blog website. Blogs written by Pranav hosted here.
                 Contains Pranav's work and projects. Visit this if page if you want to hire a rockstar developer"/>
-                <meta property="og:image" content={mugshot}/>
+                <meta property="og:image" content={mugShot}/>
                 <meta property="og:url" content="https://pranavjoglekarcodes.web.app"/>
 
                 <meta name="twitter:title" content="Pranav Joglekar | Portfolio"/>

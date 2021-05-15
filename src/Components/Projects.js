@@ -1,11 +1,5 @@
 import React from 'react';
-import togthrdo from '../assets/project-togthrdo.jpg';
-import webreview from '../assets/project-webreview.png';
-import ima from '../assets/project-ima.jpeg';
-import milaap from '../assets/project-milaap.png';
-import smtp from '../assets/project-smtpclient.png';
-import encryptor from '../assets/project-encryptor.png';
-
+import { StaticImage } from "gatsby-plugin-image"
 
 const renderTopProjects = () => {
   return (
@@ -14,7 +8,14 @@ const renderTopProjects = () => {
           <section className="single-project-left">
             <div className="project-image">
               <a href="https://milaap.video/" target="_blank" rel="noopener noreferrer">
-                <img className="large" src={milaap} alt="Milaap Video"/>
+                <StaticImage
+                  aspectRatio={2 / 1}
+                  alt="Milaap Call in progress"
+                  // Assisi, Perúgia, Itália by Bernardo Ferrari, via Unsplash
+                  src="../assets/project-milaap.png"
+                  formats={["auto", "webp", "avif"]}
+                  className="large"
+                />
               </a>
             </div>
           </section>
@@ -64,7 +65,14 @@ const renderTopProjects = () => {
           <section className="single-project-left">
             <div className="project-image">
               <a href="https://stormy-woodland-33610.herokuapp.com/login/" target="_blank" rel="noopener noreferrer">
-                <img className="large" src={togthrdo} alt="togthrdo" />
+                <StaticImage
+                  aspectRatio={2 / 1}
+                  alt="togthrdo note taking in progress"
+                  // Assisi, Perúgia, Itália by Bernardo Ferrari, via Unsplash
+                  src="../assets/project-togthrdo.jpg"
+                  formats={["auto", "webp", "avif"]}
+                  className="large"
+                />
               </a>
             </div>
           </section>
@@ -118,7 +126,14 @@ const renderOtherProjects = () => {
           <section className="single-project-left">
             <div className="project-image">
               <a href="https://imamssss.com" target="_blank" rel="noopener noreferrer">
-                <img className="small" src={ima} alt="Indian Medical Association Maharashtra Section Social Security Scheme" />
+                <StaticImage
+                  aspectRatio={1 / 1}
+                  alt="IMA logo"
+                  // Assisi, Perúgia, Itália by Bernardo Ferrari, via Unsplash
+                  src="../assets/project-ima.jpeg"
+                  formats={["auto", "webp", "avif"]}
+                  className="small"
+                />
               </a>
             </div>
           </section>
@@ -165,7 +180,14 @@ const renderOtherProjects = () => {
         <section className="single-project">
           <section className="single-project-left">
             <div className="project-image">
-              <img className="small" src={smtp} alt="smtp_client" height="250px"/>
+                <StaticImage
+                  aspectRatio={2 / 1}
+                  alt="smtp client image"
+                  // Assisi, Perúgia, Itália by Bernardo Ferrari, via Unsplash
+                  src="../assets/project-smtpclient.png"
+                  formats={["auto", "webp", "avif"]}
+                  className="small"
+                />
             </div>
           </section>
 
@@ -236,7 +258,13 @@ const renderOtherProjects = () => {
           <section className="single-project-left">
             <div className="project-image">
               <a href="https://encryptor4cubbitbypranav.web.app" target="_blank" rel="noopener noreferrer">
-                <img className="large" src={encryptor} alt="web review" />
+                <StaticImage
+                  aspectRatio={2 / 1}
+                  alt="encryption app"
+                  src="../assets/project-encryptor.png"
+                  formats={["auto", "webp", "avif"]}
+                  className="large"
+                />
               </a>
             </div>
           </section>
@@ -278,7 +306,14 @@ const renderOtherProjects = () => {
           <section className="single-project-left">
             <div className="project-image">
               <a href="https://www.npmjs.com/package/web-review" target="_blank" rel="noopener noreferrer">
-                <img className="small" src={webreview} alt="web review" />
+                <StaticImage
+                  aspectRatio={2 / 1}
+                  alt="web-review image"
+                  // Assisi, Perúgia, Itália by Bernardo Ferrari, via Unsplash
+                  src="../assets/project-webreview.png"
+                  formats={["auto", "webp", "avif"]}
+                  className="small"
+                />
               </a>
             </div>
           </section>
@@ -344,7 +379,7 @@ function Projects(props) {
             {props.type==="all" && renderOtherProjects()}
 
         <br/>
-        <p> See more Projects <a href="https://github.com/Pranav2612000?tab=repositories"> here </a></p>
+        <p> See more <a href="https://github.com/Pranav2612000?tab=repositories">Projects here </a></p>
         <br/>
       </div>
     </div>

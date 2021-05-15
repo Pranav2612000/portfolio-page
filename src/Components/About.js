@@ -1,5 +1,6 @@
 import React from 'react';
-import Pranav from '../assets/Mugshot.jpeg'
+import { StaticImage } from "gatsby-plugin-image"
+import  Pranav from "../assets/Mugshot.jpeg";
 
 function About() {
   return (
@@ -9,7 +10,14 @@ function About() {
         <section id="about-pranav">
 
           <div className="about-pranav-photo-wrapper">
-            <img src={Pranav} id="pranav-photo" alt="Pranav avatar"/>
+            <StaticImage
+              alt="photo of Pranav"
+              // Assisi, Perúgia, Itália by Bernardo Ferrari, via Unsplash
+              src="../assets/Mugshot.jpeg"
+              formats={["auto", "webp", "avif"]}
+              id="pranav-photo"
+              height={300}
+            />
           </div>
 
           <div className="about-pranav-summary">
