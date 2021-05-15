@@ -7,14 +7,9 @@ import smtp from '../assets/project-smtpclient.png';
 import encryptor from '../assets/project-encryptor.png';
 
 
-
-function Projects() {
+const renderTopProjects = () => {
   return (
-    <div id="projects" className="section-wrapper">
-      <div className="projects-wrapper">
-
-        <h1 className="section-title">Projects</h1>
-
+    <>
         <section className="single-project">
           <section className="single-project-left">
             <div className="project-image">
@@ -112,8 +107,13 @@ function Projects() {
             </div>
           </section>
         </section>
+    </>
+  );
+};
 
-
+const renderOtherProjects = () => {
+  return (
+      <>
         <section className="single-project">
           <section className="single-project-left">
             <div className="project-image">
@@ -329,6 +329,19 @@ function Projects() {
             </div>
           </section>
         </section>
+      </>
+    )
+}
+
+function Projects(props) {
+  return (
+    <div id="projects" className="section-wrapper">
+      <div className="projects-wrapper">
+
+        <h1 className="section-title">Projects</h1>
+
+            {renderTopProjects()}
+            {props.type==="all" && renderOtherProjects()}
 
         <br/>
         <p> See more Projects <a href="https://github.com/Pranav2612000?tab=repositories"> here </a></p>
