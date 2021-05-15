@@ -213,6 +213,64 @@ h3 {
   background-size: 400% 400%;
 }
 
+.hero--secondary {
+	--mask: radial-gradient(
+		circle at var(--x, 50%) var(--y, 50%),
+    black var(--maskSize1, 0), 
+		transparent 0, 
+		transparent var(--maskSize2, 0),
+    black var(--maskSize2, 0), 
+		black var(--maskSize3, 0), 
+		transparent 0);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	/*background: linear-gradient(45deg, #2c7770, #631686, #6b063c, rgb(182, 122, 11));*/
+  background: rgb(49, 49, 49);
+  /*
+  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+  -webkit-background-size: 400% 400%;
+  -moz-background-size: 400% 400%;
+  -o-background-size: 400% 400%;
+  background-size: 400% 400%;
+  animation: change 7s ease-in-out infinite;
+  */
+	color: rgb(9, 14, 23);
+	-webkit-mask-image: var(--mask);
+	mask-image: var(--mask);
+}
+
+.hero--secondary--dark {
+	--mask: radial-gradient(
+		circle at var(--x, 50%) var(--y, 50%),
+    black var(--maskSize1, 0), 
+		transparent 0, 
+		transparent var(--maskSize2, 0),
+    black var(--maskSize2, 0), 
+		black var(--maskSize3, 0), 
+		transparent 0);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	/*background: linear-gradient(45deg, #2c7770, #631686, #6b063c, rgb(182, 122, 11));*/
+  background: rgb(209, 207, 207);
+  /*
+  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+  -webkit-background-size: 400% 400%;
+  -moz-background-size: 400% 400%;
+  -o-background-size: 400% 400%;
+  background-size: 400% 400%;
+  animation: change 7s ease-in-out infinite;
+  */
+	color: rgb(9, 14, 23);
+	-webkit-mask-image: var(--mask);
+	mask-image: var(--mask);
+}
+
 @keyframes change {
   0% {
     background-position: 0 50%;
@@ -602,7 +660,6 @@ footer a:hover, .top-sign a:hover {
   align-items: flex-start;
 }
 .code-box pre code {
-  font-family: $code-font;
   color: #555;
 }
 .code-box pre code .const {
