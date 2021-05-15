@@ -21,7 +21,6 @@ const IndexPage = () => {
             <About />
             <Skills />
             <Projects />
-            <Life mode={mode}/>
             <Resume />
             <Contact />
           </>
