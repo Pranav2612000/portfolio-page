@@ -291,17 +291,21 @@ function Projects() {
             </div>
 
             <div className="project-description">
-              <p>
+              <div>
+                  <p>
                 It is extremely important from the developer's point of view that your website is responsive and follows good practices. That's why me and team have developed web-review a CLI based npm package which will compile reports consisting of :
-                  <div>Performace of website</div>
-                  <div>Responsiveness (Screenshots)</div>
-                  <div>SEO capability</div>
-                  <div>Accessibility</div>
-                  <div>Best Practices</div>
-                  <div>Progressive web app support</div>
+                  </p>
+                  <ul>
+                    <li>Performace of website</li>
+                    <li>Responsiveness (Screenshots)</li>
+                    <li>SEO capability</li>
+                    <li>Accessibility</li>
+                    <li>Best Practices</li>
+                    <li>Progressive web app support</li>
+                  </ul>
                 <br/>
                 And serve it to you HTML format. All this is done by modifying lighthouse under the hood.
-              </p>
+              </div>
               
               <p>Technologies:</p>
               <ul>
