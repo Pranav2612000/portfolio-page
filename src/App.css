@@ -707,6 +707,10 @@ footer a:hover, .top-sign a:hover {
 /* SMALL SCREEN */
 @media only screen and (max-width: 769px) {
 
+  .mobile-hidden {
+    display: none;
+  }
+
   .hero-section > a {
     margin-top: -5em;
   }
@@ -796,4 +800,13 @@ footer a:hover, .top-sign a:hover {
   
 }
 
-
+@media (hover: none) {
+  .mobile-hidden {
+    display: none;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .mobile-hidden {
+    display: none;
+  }
+}
