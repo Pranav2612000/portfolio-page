@@ -21,12 +21,11 @@ function Nav(props) {
       </ul>
 
       <ul className="ul-nav">
-        <a href="/#about" className="nav-item"><li>About</li></a>
-        <a href="/#skills" className="nav-item"><li>Skills</li></a>
+        <a href="/" className="nav-item"><li>Home</li></a>
         <a href="/projects" className="nav-item"><li>Projects</li></a>
         <a href="/experience" className="nav-item"><li>Experience</li></a>
         <a href="/#resume" className="nav-item"><li>Resume</li></a>
-        <a href="/#contact" className="nav-item"><li>Contact</li></a>
+        <a href="/#contact" className="nav-item"><li>Contact Me</li></a>
       </ul>
 
     </nav>

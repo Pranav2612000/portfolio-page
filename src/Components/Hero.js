@@ -36,6 +36,9 @@ function Hero(props) {
         ease: 'sine.out',
       })
     })
+    return () => {
+      console.log("removing hero");
+    };
   }, [])
 
   return (
@@ -45,8 +48,7 @@ function Hero(props) {
         <a href="/#about">
           <div className={props.mode ? "hero-title hero-title-dark" : "hero-title"}>
             <h1>Pranav Joglekar</h1>
-            <h2>Full Stack Developer</h2>
-            <h2>Cyber Security Enthusiast</h2>
+            <h2>A Tech Cognoscente</h2>
           <div className="code-box">
             <pre>
               <code>
@@ -56,29 +58,27 @@ function Hero(props) {
               </code>
 
               <code>
-                &emsp;<span className="property">specialty</span>
+                &emsp;<span className="property">forte</span>
                 <span className="colon">:</span>{" "}
-                <span className="string">"MERN, System Design"</span>,
+                <span className="string">"Full Stack Web Development & System Design"</span>,
               </code>
               <code>
                 &emsp;<span className="property">interests</span>
                 <span className="colon">:</span> [
               </code>
               <code>
-                &emsp;&emsp;<span className="string">"writing Clean code"</span>,
+                &emsp;&emsp;<span className="string">"building user centric products from scratch"</span>,
               </code>
               <code>
-                &emsp;&emsp;
-                <span className="string">"building Modern but thorough solutions from scratch"</span>,
-              </code>
-              <code>
-                &emsp;&emsp;<span className="string">"learning New technologies"</span>,
-              </code>
-              <code>
-                &emsp;&emsp;<span className="string">"ensuring the written code is secure"</span>,
+                &emsp;&emsp;<span className="string">"learning new technologies, frameworks & languages"</span>,
               </code>
               <code>&emsp;],</code>
-              <code>{"}"}</code>
+              <code>
+                &emsp;<span className="property">_id</span>
+                <span className="colon">:</span>{" "}
+                <span className="string">"writing clean and secure code"</span>,
+              </code>
+              <code>{"};"}</code>
             </pre>
           </div>
           </div>
@@ -114,7 +114,6 @@ function Hero(props) {
           <div className={props.mode ? "hero-title hero-title-dark" : "hero-title"}>
             <h1>Pranav Joglekar</h1>
             <h2>Full Stack Developer</h2>
-            <h2>Cyber Security Enthusiast</h2>
           <div className="code-box">
             <pre>
               <code>
@@ -124,28 +123,26 @@ function Hero(props) {
               </code>
 
               <code>
-                &emsp;<span className="property">specialty</span>
+                &emsp;<span className="property">forte</span>
                 <span className="colon">:</span>{" "}
-                <span className="string">"MERN, System Design"</span>,
+                <span className="string">"Full Stack Web Development & System Design"</span>,
               </code>
               <code>
                 &emsp;<span className="property">interests</span>
                 <span className="colon">:</span> [
               </code>
               <code>
-                &emsp;&emsp;<span className="string">"writing Clean code"</span>,
+                &emsp;&emsp;<span className="string">"building user centric products from scratch"</span>,
               </code>
               <code>
-                &emsp;&emsp;
-                <span className="string">"building Modern but thorough solutions from scratch"</span>,
-              </code>
-              <code>
-                &emsp;&emsp;<span className="string">"learning New technologies"</span>,
-              </code>
-              <code>
-                &emsp;&emsp;<span className="string">"ensuring the written code is secure"</span>,
+                &emsp;&emsp;<span className="string">"learning new technologies, frameworks & languages"</span>,
               </code>
               <code>&emsp;],</code>
+              <code>
+                &emsp;<span className="property">_id</span>
+                <span className="colon">:</span>{" "}
+                <span className="string">"writing clean and secure code"</span>,
+              </code>
               <code>{"}"}</code>
             </pre>
           </div>
