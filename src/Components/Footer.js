@@ -1,10 +1,19 @@
 import React from 'react';
 
+const scrollToTop = () => {
+  window.scroll({
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth'
+  });
+  return;
+};
+
 function Footer() {
   return (
     <div className="footer-wrapper">
       <div className="top-sign">
-        <a href="/#home">↑ TOP</a>
+        <a onClick={scrollToTop}>↑ TOP</a>
       </div>
 
       <div className="social-media-icons">
