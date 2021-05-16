@@ -14,7 +14,7 @@ function Resume() {
         </div>
 
         <div className="resume-icon-wrapper">
-          <a href="https://drive.google.com/file/d/1ovnlPSFNjhN6-vKRID7cKlbE5cQcnIt0/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <a href="/pranav_joglekar_resume.pdf" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faFilePdf} size="2x"/>
           </a>
         </div>
