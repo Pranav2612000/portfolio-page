@@ -45,10 +45,10 @@ class Layout extends React.Component {
                 <title>Portfolio | Pranav Joglekar</title>
                 <link rel="icon" href={favicon}/>
                 <link rel="canonical" href="https://pranavjoglekarcodes.web.app"/>
-                <meta name="description" content="Pranav Joglekar's Portfolio Page. See a list of Pranav's Projects or
-                read his blogs"/>
+                <meta name="description" content="Pranav Joglekar's portfolio and blog website. Blogs written by Pranav hosted here.
+                Contains Pranav's work and projects. Visit this if page if you want to hire a rockstar developer"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                <meta name="keywords" content="Pranav Joglekar Portfolio Blog"/>
+                <meta name="keywords" content="Pranav Joglekar Portfolio Projects Blog Experience"/>
                 <meta name="author" content="Pranav Joglekar"/>
 
                 <meta property="og:title" content="Pranav Joglekar | Portfolio"/>
