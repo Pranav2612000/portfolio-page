@@ -4,6 +4,7 @@ import {
   faMoon,
   faSun,
 } from '@fortawesome/free-solid-svg-icons';
+import {Link} from 'gatsby'
 
 function Nav(props) {
   return (
@@ -22,8 +23,9 @@ function Nav(props) {
 
       <ul className="ul-nav">
         <a href="/" className="nav-item"><li>Home</li></a>
-        <a href="/projects" className="nav-item"><li>Projects</li></a>
-        <a href="/experience" className="nav-item"><li>Experience</li></a>
+        <Link to="/blogs" className="nav-item"><li>Blog</li></Link>
+        <Link href="/projects" className="nav-item"><li>Projects</li></Link>
+        <Link href="/experience" className="nav-item"><li>Experience</li></Link>
         <a href="/#resume" className="nav-item"><li>Resume</li></a>
         <a href="/#contact" className="nav-item"><li>Contact Me</li></a>
       </ul>

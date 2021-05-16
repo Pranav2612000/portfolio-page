@@ -1,0 +1,249 @@
+---
+title: "Phishinder: A phishing detection tool"
+description: "A step by step guide to how I created phishinder, a tool which takes a website url as input and returns if the site is legitimate or not. The tool uses pretrained machine learning models to determine if a site is malicous. The blog also contains information about how I trained the models."
+date: 2020-11-16
+published: true
+desktop_img: ./desktop.jpg
+alt_img: "image of user's credentials being phished"
+---
+
+
+## Introduction
+This blog is about a **phishing detection tool**, I have created(*Work in Progress*) which takes an URL as an input and returns whether the URL is a **malicious** phishing site or a **legitimate** one. I’ve explained how I’ve created this tool(and how you can too) and how it is used. Let's understand what **phishing** is before we start.
+
+## What is Phishing?
+**Phishing** is a criminal mechanism employing both social engineering and technical tricks to steal consumers’ personal identity data and financial account credentials. **Social engineering** schemes use spoofed e-mails, purporting to be from legitimate businesses and agencies, designed to lead consumers to **counterfeit** websites that trick recipients into divulging financial data such as usernames and passwords. As systems become more and more secure, humans are becoming weaker and lazier. Attackers use **social engineering techniques**, creating fake emails which redirect users to **malicious** websites(very similar to the original ones). When users enter their **secret information** on such websites, this secret information is transferred to the attacker, allowing attackers to gain your identity.
+
+## Using the Tool
+To use the **tool**, users would first need to clone a copy from [the repo](https://github.com/Pranav2612000/phishinder). Then the required dependencies need to be installed using *pip -r requirements.txt*
+Users can then run ```code python3 phishinder.py``` to start the program, and enter an URL which is to be checked once the prompt asks for it. The result will be printed back on the screen
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/blu6tamwpez9e521h1jj.png)
+
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/rspd2tswo4pqxd6cfuz0.png)
+
+## Links:
+Link to Repo: [Here](https://github.com/Pranav2612000/phishinder)
+Link to notebook: [Here](https://colab.research.google.com/drive/1_CnjWOocwkhtumgrhAYkm0D4BfGZ4CCx#scrollTo=po1WFNp3XLa3)
+
+## Overview
+The **program** takes the url name as its input, and returns whether the url is **malicious or not** to the user. I am using **machine-learning** techniques to classify a website into malicious and safe categories. Details about the **model** will be explained later.
+I’ve built this tool in **python** as it provides helpful libraries*(e.g requests, beautifulsoup)* and a lot of packages which makes it easier to gather data about the site. Python also makes it easier to train and deploy ML models.
+
+## Part-I Training the Model
+
+I have used the [**Phishing Websites Dataset**](https://archive.ics.uci.edu/ml/datasets/phishing+websites) dataset to train the **ML model** . The dataset consists of 30 **columns or features** each equally important in detecting whether a site is malicious or not. The columns along with a brief description of each is given in the **Appendix A**.
+
+Let's get started, first install all the required dependencies.
+```python
+!pip install numpy
+!pip install pandas
+```
+
+And then import them
+```python
+import pandas as pd
+import numpy as np
+```
+
+Next, open the dataset. (This command may differ for you depending on the location and name of the dataset)
+```python
+data = pd.read_csv("Phishing.csv")
+```
+
+Play around with the dataset a bit - understand it’s values, dimensions, what preprocessing operations are required. We observe that the input takes 3 values -1, 0, 1 and the output takes two values -1 for malicious and 1 for safe. 
+For a basic model, No special input preprocessing was needed. We’ll change the output a bit, so that the column is called Result and has two values 0 for malicious and 1 for safe.
+```python
+data.rename(columns={'Result': 'Class'}, inplace=True)
+data['Class'] = data['Class'].map({-1: 0, 1:1})
+```
+
+Lets split the data into training and testing sets
+```python
+from sklearn.model_selection import train_test_split
+X = data.iloc[:, 0:30].values.astype(int)
+y = data.iloc[:,30].values.astype(int)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=np.random.seed(7))
+```
+
+For the sake of this article, I’ll be using the **Logistic Regression**. You may try out different models, with hyperparameter tuning to get better results. Various blogs have also used Deep Learning Methods for training the model. These have been added in **Appendix B**.
+```python
+from sklearn.linear_model import LogisticRegression
+lr = LogisticRegression()
+lr.fit(X_train, y_train)
+```
+
+Here are the results of this model,
+```python
+from sklearn.metrics import accuracy_score, classification_report
+print('Accuracy Score for logistic regression: {}%'.format(accuracy_score(y_test, lr.predict(X_test))))
+print('Classification Report:')
+print(classification_report(y_test,lr.predict(X_test), target_names=["Malicious Websites", "Normal Websites"]))
+```
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/8oaot7h8xip9bf1mwrxn.png)
+
+Finally, let's dump the model to a file so that it can be conveniently used later in programs.
+```python
+from sklearn.externals import joblib
+joblib.dump(lr, "phishing_detection.pkl")
+```
+
+This completes with the Machine Learning Part of the tutorial
+
+## Part II Developing the python tool
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/6oa9wctw90n3c1i78guv.jpg)
+
+Yup. Now we have a working model ready, but how do we use this model? It requires data in the form of -1,0,1 values of 30 fields and there is no direct way to get those for a website. Here’s where the 2nd part comes in. Given a website name from the user, we’ll try to get the values of each of the 30 features( listed in **Appendix A**). Once we have the values of the 30 features we can use the model to get its output, which informs us whether a site is malicious or not.
+
+First, let's import the dependencies we’ll be needing. Use pip to install the packages not available in your system. You can also use pip install -r requirements.txt to automatically install all packages required.
+```python
+import joblib #importing the model
+import dns # getting dns info about url
+import dns.resolver #getting dns info about url 
+import whois # getting whois info about url
+from dateutil.relativedelta import relativedelta #time calculations required in feature #9
+from urllib.request import urlopen # access the url
+from bs4 import BeautifulSoup # scraping the url
+import re
+import datetime
+import favicon # required for feature #10
+import requests
+import os
+import csv
+import json
+import pandas as pd
+from random import randint
+import shutil
+```
+
+Save the ML model to a variable
+```python
+phisher = joblib.load("./phishing_detection.pkl")
+```
+
+Create the input to the ML model. Initialize it to all 0s
+```python
+site = [[]];
+for i in range(30):
+      site[0].append(0)
+```
+
+Get name of the url to be checked from the user
+```python
+url = input("Enter name of website(with https)")
+```
+
+Get the name of the url without the trailing http/https, and perform operations on the url to scrape the webpage and obtain information pertaining to its DNS records and WHOIS entries
+```python
+path_start = url.find(':') + 3
+path = url[path_start:]
+try:
+    html = urlopen(url)
+    bs = BeautifulSoup(html, 'html.parser')
+except:
+    bs = None
+
+try:
+    domain = whois.query(path)
+except:
+    domain = None
+try:
+    dnsresult = dns.resolver.query(path, 'A')
+except:
+    dnsresult = None
+```
+
+The next part is filling the 30 features. For the sake of brevity, I’ll be covering only some of the 30 features. The implementation of the remaining features can be found in the repo(Link above). You can also reach out anytime, if you are interested to know more.
+
+URLs with length greater than 60 have a chance of being malicious.
+```python
+if(len(url) > 60):
+  site[0][1] = -1
+if(len(url) < 30):
+  site[0][1] = 1
+  ```
+
+Phishing Sites are shortlisted and have not phishing records
+```python
+import dns
+import dns.resolver
+dnsresult = dns.resolver.query(path, 'A')
+if(dnsresult != None):
+    site[0][25] = 1
+else:
+    site[0][25] = -1
+```
+Malicious sites usually redirect a lot of times before reaching the actual site
+```python
+try:
+    r = requests.head(url)
+    if(str(r.status_code)[0] == '2'):
+      site[0][18] = -1
+    else:
+      site[0][18] = +1
+```
+
+**NOTE**: These are just some of the features. More features can be found on the repo. I am still working on some of those, but the program still gives good results using only the ones which have been implemented and substituting -1 for the rest.
+The comprehensive code, along with the packages required can be obtained through the repo. The code is simple and self-explanatory, so I won’t be talking about it much in this post.
+
+Once the input data is filled, we pass it to the model for prediction, the model prediction is converted to human-understandable output and printed on the screen
+```code
+results = ["Malicious", "Safe"]
+print(results[int(phisher.predict(site))])
+```
+This completes the implementation of the tool.
+
+## Future Scope:
+The same algorithm can be packaged in the form of a **REST Service** to be consumed. I plan to build a **browser extension**, which uses this API to detect if sites are malicious or not. If a malicious site is found, the browser extension would stop executing the javascript of the page, which would also prevent other types of attacks. The user needs to open the extension and explicitly allow this site to run. This extra effort will also prevent lazy/non-tech users who tend to ignore browser warnings from phishing attacks.
+
+#### PS: 
+Looking for contributors to help with the project. Feel free to reach out to suggest improvements, ask questions or discuss more on this.
+
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/k0i4ed8a5ojgmda1il3a.png)
+
+## Appendix A
+### URL Based Features
+1. IP address - If an IP address is used as an alternative of the domain name in the URL, such as “http://125.98.3.123/fake.html”, users can be sure that someone is trying to steal their personal information.
+1. Long URL -  Phishers use long URL to hide the doubtful part in the address bar.
+1. URL Shortening - Phishers use url shortening services to create real looking address
+1. URL’s having @ symbol - Using “@” symbol in the URL leads the browser to ignore everything preceding the “@” symbol and the real address often follows the “@”
+1. Redirection using // - The existence of “//” within the URL path means that the user will be redirected to another website. An example of such URL’s is: “http://www.legitimate.com//http://www.phishing.com”.
+1. Presence of - : The dash symbol is rarely used in legitimate URLs. Phishers tend to add prefixes or suffixes separated by (-) to the domain name so that users feel that they are dealing with a legitimate webpage.
+1. Presence of subdomains - websites having more than 3 subdomains are considered unsecure
+1. Presence of HTTPS: Websites without https or with certificate of unknown authorities are considered insecure
+1. Domain Registration Length - Malicious websites are short lived - created utmost a year back
+1. Favicon - Favicon icons loaded from another domain?
+1. Ports - malicious site servers usually have non-standard ports open too.
+1. Https in domain: phishers add https in domain to trick users
+
+### B) Abnormality features:
+1. Images from different domain: Malicious websites usually load images from other domains.
+1. URLs of Anchor - Malicious websites usually have hyperlinks to different domains
+1. Content of meta tag - Malicious websites usually have meta links to another domain
+1. Server Form Handler - If the form submits data to a different domain, the site has a high chance of being suspicious
+1. Client-side mailto: If the website submits form data to an email using mailto, it is malicious
+1. Presence in whois - if the website doesn’t have entry in whois, it may be malicious
+
+### C) HTML/Javascript features
+1. Forwarding - if the url redirect greater than 3 times, it is malicious
+1. Fake-statusbar - check if javascript contains code, especially “onmouseover” to display fake statusbar
+1. Right-click disabled - most phishing sites have right click disabled
+1. Presence of pop-ups: most malicious sites have pop-ups to submit forms
+1. Invisible iframes - if a site contains invisible iframes(frameBorder attribute), the site is phishing data
+
+### D) Domain based features:
+1. Age of Domain - The domain name should be older than atleast 1 year for the site to be valid
+1. DNS Records - Absence of records, or unknown records
+1. Traffic - Phishing sites live for a short time and so do not have a lot of traffic
+1. Pagerank - phishing sites have lower pagerank value
+1. Google Indes: phishing sites have lower google index
+1. Number of links pointing to page: phishing sites have low number of sites pointing to them
+1. Statistical reports: is the site found in cites like phishTank
+
+
+## Appendix B - Different ML Models
+https://towardsdatascience.com/phishing-domain-detection-with-ml-5be9c99293e5
+
+## Resources:
+https://medium.com/intel-software-innovators/detecting-phishing-websites-using-machine-learning-de723bf2f946
+https://www.researchgate.net/publication/269032183_Detection_of_phishing_URLs_using_machine_learning_techniques
+https://archive.ics.uci.edu/ml/datasets/phishing+websites

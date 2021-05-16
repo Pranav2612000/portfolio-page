@@ -1,5 +1,6 @@
 import React from 'react';
 import { fallDown as Menu } from 'react-burger-menu';
+import {Link} from 'gatsby'
 
 class Hamburger extends React.Component {
   constructor(props) {
@@ -121,9 +122,10 @@ class Hamburger extends React.Component {
             isOpen={this.state.menuOpen}
             onStateChange={(state) => this.handleStateChange(state)}
             disableAutoFocus >
-            <a onClick={() => this.closeMenu()} href="/" className="menu-item"><li>Home</li></a>
-            <a onClick={() => this.closeMenu()} href="/projects" className="menu-item"><li>Projects</li></a>
-            <a onClick={() => this.closeMenu()} href="/experience" className="menu-item"><li>Experience</li></a>
+            <Link onClick={() => this.closeMenu()} href="/" className="menu-item"><li>Home</li></Link>
+            <Link onClick={() => this.closeMenu()} to="/blogs" className="nav-item"><li>Blog</li></Link>
+            <Link onClick={() => this.closeMenu()} href="/projects" className="menu-item"><li>Projects</li></Link>
+            <Link onClick={() => this.closeMenu()} href="/experience" className="menu-item"><li>Experience</li></Link>
             <a onClick={() => this.closeMenu()} href="/#resume" className="menu-item"><li>Resume</li></a>
             <a onClick={() => this.closeMenu()} href="/#contact" className="menu-item"><li>Contact</li></a>
           </Menu>
@@ -133,9 +135,10 @@ class Hamburger extends React.Component {
             isOpen={this.state.menuOpen}
             onStateChange={(state) => this.handleStateChange(state)}
             disableAutoFocus >
-            <a onClick={() => this.closeMenu()} href="/" className="menu-item"><li>Home</li></a>
-            <a onClick={() => this.closeMenu()} href="/projects" className="menu-item"><li>Projects</li></a>
-            <a onClick={() => this.closeMenu()} href="/experience" className="menu-item"><li>Experience</li></a>
+            <Link onClick={() => this.closeMenu()} href="/" className="menu-item"><li>Home</li></Link>
+            <Link onClick={() => this.closeMenu()} to="/blogs" className="nav-item"><li>Blog</li></Link>
+            <Link onClick={() => this.closeMenu()} href="/projects" className="menu-item"><li>Projects</li></Link>
+            <Link onClick={() => this.closeMenu()} href="/experience" className="menu-item"><li>Experience</li></Link>
             <a onClick={() => this.closeMenu()} href="/#resume" className="menu-item"><li>Resume</li></a>
             <a onClick={() => this.closeMenu()} href="/#contact" className="menu-item"><li>Contact</li></a>
           </Menu>

@@ -8,6 +8,19 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+          extensions: [`.mdx`, `.md`],
+      },
+    },
+    {
+        resolve: `gatsby-source-filesystem`,
+        options: {
+            name: `posts`,
+            path: `${__dirname}/src/posts`,
+        },
+    },
+    {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [

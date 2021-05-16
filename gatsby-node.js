@@ -1,4 +1,19 @@
 const path = require('path')
+const { createFilePath } = require(`gatsby-source-filesystem`);
+
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions
+
+  if (node.internal.type === `Mdx`) {
+      const value = createFilePath({ node, getNode })
+
+      createNodeField({
+          name: `slug`,
+          node,
+          value: `/blogs/posts${value}`,
+      })
+  }
+}
 
 exports.modifyWebpackConfig = ({ config, stage }) => {
   config.merge({
@@ -31,55 +46,37 @@ exports.modifyWebpackConfig = ({ config, stage }) => {
   return config
 }
 
-/*
-// Implement the Gatsby API “createPages”. This is called once the
-// data layer is bootstrapped to let plugins create pages from data.
-exports.createPages = ({ boundActionCreators, graphql }) => {
-  const { createPage } = boundActionCreators
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions
 
-  return new Promise((resolve, reject) => {
-    const iconPageTemplate = path.resolve(`src/templates/IconPage.js`)
-    // Query for markdown nodes to use in creating pages.
-    resolve(
-      graphql(
-        `
-          {
-            allFile {
+  const result = await graphql
+  (`
+      query {
+          allMdx {
               edges {
-                node {
-                  childrenDeviconJson {
-                    name
-                    versions {
-                      svg
-                    }
+                  node {
+                      id
+                      fields {
+                          slug
+                      }
                   }
-                }
               }
-            }
           }
-        `
-      ).then(result => {
-        if (result.errors) {
-          reject(result.errors)
-        }
+      }
+  `)
 
-        // Create pages for each icon name
-        result.data.allFile.edges.forEach(({ node }) => {
-          node.childrenDeviconJson.forEach(({ name, versions }) => {
-            createPage({
-              path: name,
-              component: iconPageTemplate,
-              context: {
-                name,
-                versions: versions.svg,
-              },
-            })
-          })
-        })
-        // eslint-disable-next-line no-useless-return
-        return
+  if (result.errors) {
+      reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
+  }
+
+  // Create blog post pages.
+  const posts = result.data.allMdx.edges
+
+  posts.forEach(({ node }, index) => {
+      createPage({
+          path: node.fields.slug,
+          component: path.resolve(`./src/Components/postPageTemplate.jsx`),
+          context: { id: node.id },
       })
-    )
   })
 }
-*/
