@@ -661,6 +661,7 @@ footer a:hover, .top-sign a:hover {
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
+  white-space: initial;
 }
 .code-box pre code {
   color: #555;
