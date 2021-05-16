@@ -121,9 +121,9 @@ class Hamburger extends React.Component {
             isOpen={this.state.menuOpen}
             onStateChange={(state) => this.handleStateChange(state)}
             disableAutoFocus >
-            <a onClick={() => this.closeMenu()} href="/#about" className="menu-item"><li>About</li></a>
-            <a onClick={() => this.closeMenu()} href="/#skills" className="menu-item"><li>Skills</li></a>
-            <a onClick={() => this.closeMenu()} href="/#projects" className="menu-item"><li>Projects</li></a>
+            <a onClick={() => this.closeMenu()} href="/" className="menu-item"><li>Home</li></a>
+            <a onClick={() => this.closeMenu()} href="/projects" className="menu-item"><li>Projects</li></a>
+            <a onClick={() => this.closeMenu()} href="/experience" className="menu-item"><li>Experience</li></a>
             <a onClick={() => this.closeMenu()} href="/#resume" className="menu-item"><li>Resume</li></a>
             <a onClick={() => this.closeMenu()} href="/#contact" className="menu-item"><li>Contact</li></a>
           </Menu>
@@ -133,9 +133,9 @@ class Hamburger extends React.Component {
             isOpen={this.state.menuOpen}
             onStateChange={(state) => this.handleStateChange(state)}
             disableAutoFocus >
-            <a onClick={() => this.closeMenu()} href="/#about" className="menu-item"><li>About</li></a>
-            <a onClick={() => this.closeMenu()} href="/#skills" className="menu-item"><li>Skills</li></a>
-            <a onClick={() => this.closeMenu()} href="/#projects" className="menu-item"><li>Projects</li></a>
+            <a onClick={() => this.closeMenu()} href="/" className="menu-item"><li>Home</li></a>
+            <a onClick={() => this.closeMenu()} href="/projects" className="menu-item"><li>Projects</li></a>
+            <a onClick={() => this.closeMenu()} href="/experience" className="menu-item"><li>Experience</li></a>
             <a onClick={() => this.closeMenu()} href="/#resume" className="menu-item"><li>Resume</li></a>
             <a onClick={() => this.closeMenu()} href="/#contact" className="menu-item"><li>Contact</li></a>
           </Menu>
