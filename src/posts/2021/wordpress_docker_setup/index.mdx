@@ -1,6 +1,7 @@
 ---
 title: "Setting up a local Wordpress, MySQL and XDebug environment with Docker"
 description: "A blog to help you setup your local wordpress environment for development. If you want to use docker & docker hub for generating, storing and building images or you wish to connect your wordpress site to a MySQL DB or just want to setup up XDebug for PHP Debugging, this guide will help you."
+keywords: "wordpress mysql docker xdebug setup configuration development"
 date: 2021-05-16
 published: true
 desktop_img: ./desktop.png
@@ -9,11 +10,11 @@ alt_img: "image displaying docker wordpress mysql and xdebug"
 
 *Note: I haven't worked with docker or with wordpress extensively before, so certain ways of doing things may be against the conventional way of doing things. Please put out a comment and let me know.*
 
-# Getting Started
+## Getting Started
 I have been given a task to set up a local wordpress development environment using docker. I have never had a chance to work extensively with docker before and decided to give this a try
 
 
-# Configuring Image Distribution
+## Configuring Image Distribution
 
 Naturally I started with reading about docker and Dockerfiles. I decided to set up the infrastructure to allow us to use our own docker images, and share them easily. 
 
@@ -53,7 +54,7 @@ Next I built the image by executing
 Now we need to push this image to dockerhub. We can directly push built images, but I decided to try a more automated process. I set up an automatic build option such that whenever someone updates the Dockerfile and pushes to github, Dockerhub automatically builds the new image. 
 This way, developers do not always need to keep on pushing their images. And new users can automatically get the latest images from dockerhub while setting up their environment
 
-# Setting up wordpress and Mysql
+## Setting up wordpress and Mysql
 
 With the image distribution problem sorted out, the next important part is to set up wordpress and mysql. 
 
@@ -108,7 +109,7 @@ While commiting the code, I observed that I was unable to commit the `mysql/` fo
 
 With these, I have a basic wordpress development setup ready. This setup works for most cases, but let us try to improve the setup further.
 
-# Adding SSL support to wordpress
+## Adding SSL support to wordpress
 
 Now, if you want to connect your wordpress database to an external database, more often than not you'll need a **SSL** connection. So I tried to set that up next. I followed this [https://techsparx.com/software-development/docker/damp/mysql-ssl-connection.html] excellent article to setup MySQL. 
 
@@ -186,7 +187,7 @@ define('MYSQL_CLIENT_FLAGS',MYSQLI_CLIENT_SSL);
 
 Save this file and restart docker. You should now be able to connect to the SSL database.
 
-# Debugging with XDebug
+## Debugging with XDebug
 Now that you have a SSL Supported Wordpress configuration, imagine this. You are developing a theme for your website, suddenly the page crashes. A bug has been introduced. You put up a lot of logs and conditional renders to debug the problem, but you are unable to find out the root cause.
 
 **XDebug** to the rescue

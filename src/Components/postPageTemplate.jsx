@@ -1,8 +1,9 @@
-import { graphql } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import Layout from '../Components/Layout.jsx';
 import Helmet from 'react-helmet'
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 export const query = graphql
     `
@@ -13,7 +14,17 @@ export const query = graphql
             body
             frontmatter {
                 title
+                description
                 date(formatString: "YYYY MMMM Do")
+                alt_img
+                desktop_img {
+                    childImageSharp {
+                        gatsbyImageData(
+                            placeholder: BLURRED
+                            formats: [AUTO, WEBP, AVIF]
+                        )
+                    }
+                }
             }
         }
     }
@@ -26,27 +37,29 @@ export default ({ data }) => {
             <Layout>
                 {(mode) => (
                     <>
-                        <div className="">
-                            <h1>{frontmatter.title}</h1>
-                            <p>{frontmatter.date}</p>
-                            <MDXRenderer>{body}</MDXRenderer>
+                        <div className="blog-page-wrapper">
+                            <button onClick={()=>navigate(-1)} className="btn-link"><p>Back to Blogs</p></button>
+                            <GatsbyImage className="blog-card-img" image={getImage(frontmatter.desktop_img)} alt={frontmatter.alt_img}/>
+                            <h1 className="blog-title">{frontmatter.title}</h1>
+                            <p className="blog-title-date"> by Pranav Joglekar | {frontmatter.date}</p>
+                            <div className={`blog-render ${mode? 'blog-render-dark':'' }`}>
+                                <MDXRenderer>{body}</MDXRenderer>
+                            </div>
                         </div>
                     </>
                 )}
             </Layout>
             <Helmet>
                 <title>{frontmatter.title} | Pranav Joglekar</title>
-                <meta name="description" content="Pranav Joglekar's Experience Page. See Pranav's work experience"/>
-                <meta name="keywords" content="Pranav Joglekar Portfolio Projects Blog Experience"/>
+                <meta name="description" content={frontmatter.description}/>
+                <meta name="keywords" content={frontmatter.keywords}/>
 
-                <meta property="og:title" content="Pranav Joglekar | Experience"/>
-                <meta property="og:description" content="Pranav Joglekar's portfolio and blog website. Blogs written by Pranav hosted here.
-                Contains Pranav's work and projects. Visit this if page if you want to hire a rockstar developer"/>
+                <meta property="og:title" content={`${frontmatter.title} | Pranav Joglekar`}/>
+                <meta property="og:description" content={frontmatter.description}/>
+                <meta name="twitter:description" content={frontmatter.description}/>
+                <meta name="twitter:title" content={`${frontmatter.title} | Pranav Joglekar`}/>
 
-                <meta name="twitter:description" content="Pranav Joglekar's work experience"/>
-                <meta name="twitter:title" content="Pranav Joglekar | Experience"/>
-
-                <meta property="og:site_name" content="Pranav Joglekar | Experience"/>
+                <meta property="og:site_name" content={`${frontmatter.title} | Pranav Joglekar`}/>
             </Helmet>
         </>
     )
