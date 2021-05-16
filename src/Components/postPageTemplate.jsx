@@ -15,6 +15,7 @@ export const query = graphql
             frontmatter {
                 title
                 description
+                keywords
                 date(formatString: "YYYY MMMM Do")
                 alt_img
                 desktop_img {
