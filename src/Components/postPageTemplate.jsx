@@ -12,6 +12,7 @@ export const query = graphql
             id: { eq: $id }
         ){
             body
+            slug
             frontmatter {
                 title
                 description
@@ -57,6 +58,7 @@ export default ({ data }) => {
 
                 <meta property="og:title" content={`${frontmatter.title} | Pranav Joglekar`}/>
                 <meta property="og:description" content={frontmatter.description}/>
+                <meta property="og:url" content={`https://pranavjoglekarcodes.web.app/blogs/posts/${data.mdx.slug}`}/>
                 <meta name="twitter:description" content={frontmatter.description}/>
                 <meta name="twitter:title" content={`${frontmatter.title} | Pranav Joglekar`}/>
 

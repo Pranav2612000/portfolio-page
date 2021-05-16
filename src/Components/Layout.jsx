@@ -57,6 +57,7 @@ class Layout extends React.Component {
                 <meta property="og:image" content={"https://pranavjoglekarcodes.web.app" + mugShot}/>
                 <meta property="og:image:width" content="600" />
                 <meta property="og:image:height" content="600" />
+                <meta property="og:url" content="https://pranavjoglekarcodes.web.app"/>
                 <meta property="og:locale" content="en_GB" />
                 <meta property="og:type" content="website" />
 

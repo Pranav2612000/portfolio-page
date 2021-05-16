@@ -24,6 +24,7 @@ const ProjectsPage = () => {
           <meta property="og:title" content="Pranav Joglekar | Projects"/>
           <meta property="og:description" content="Pranav Joglekar's portfolio and blog website. Blogs written by Pranav hosted here.
           Contains Pranav's work and projects. Visit this if page if you want to hire a rockstar developer"/>
+          <meta property="og:url" content="https://pranavjoglekarcodes.web.app/projects"/>
 
           <meta name="twitter:description" content="Pranav Joglekar's portfolio and blog"/>
           <meta name="twitter:title" content="Pranav Joglekar | Projects"/>

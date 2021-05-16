@@ -23,6 +23,7 @@ const ExperiencePage = () => {
           <meta property="og:title" content="Pranav Joglekar | Experience"/>
           <meta property="og:description" content="Pranav Joglekar's portfolio and blog website. Blogs written by Pranav hosted here.
           Contains Pranav's work and projects. Visit this if page if you want to hire a rockstar developer"/>
+          <meta property="og:url" content="https://pranavjoglekarcodes.web.app/experience"/>
 
           <meta name="twitter:description" content="Pranav Joglekar's work experience"/>
           <meta name="twitter:title" content="Pranav Joglekar | Experience"/>

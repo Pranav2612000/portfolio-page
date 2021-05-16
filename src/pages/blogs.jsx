@@ -56,6 +56,7 @@ const BlogsPage = ({data}) => {
                 <meta property="og:title" content="Pranav Joglekar | Blogs"/>
                 <meta property="og:description" content="Pranav Joglekar's blog and portfolio website. Blogs written by Pranav hosted here.
                 Contains Pranav's work and projects. Visit this if page if you want to hire a rockstar developer"/>
+                <meta property="og:url" content="https://pranavjoglekarcodes.web.app/blogs"/>
 
                 <meta name="twitter:description" content="Pranav Joglekar's blogs"/>
                 <meta name="twitter:title" content="Pranav Joglekar | Blogs"/>
