@@ -80,3 +80,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       })
   })
 }
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type MdxFrontmatter {
+      title: String!
+      description: String!
+      desktop_img: File
+    }
+  `
+  createTypes(typeDefs)
+}
