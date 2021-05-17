@@ -43,6 +43,7 @@ module.exports = {
             url: path,
             changefreq: 'daily',
             priority: 0.7,
+            lastmod: new Date(),
           }
         },
       }
