@@ -1,4 +1,7 @@
 module.exports = {
+  siteMetadata: {
+    siteUrl: `https://pranavjoglekarcodes.web.app`,
+  },
   plugins: [
     {
       resolve: "gatsby-plugin-google-tagmanager",
@@ -6,6 +9,43 @@ module.exports = {
         id: "GTM-KHW3X7J",
         includeInDevelopment: false,
       },
+    },
+    {
+      resolve: "gatsby-plugin-sitemap",
+      options: {
+        query: 
+        `{
+            site {
+              siteMetadata {
+                siteUrl
+              }
+            }
+
+            allSitePage {
+              nodes {
+                path
+              }
+            }
+          }`,
+        resolvePages: ({ site, allSitePage }) => {
+          const temp= allSitePage.nodes
+            .map((node) => {
+              return {
+                path: site.siteMetadata.siteUrl + node.path,
+                changefreq: 'daily',
+                priority: 0.7,
+              };
+            });
+           return temp;
+        },
+        serialize: ({path}) => {
+          return {
+            url: path,
+            changefreq: 'daily',
+            priority: 0.7,
+          }
+        },
+      }
     },
     {
       resolve: `gatsby-transformer-remark`,
