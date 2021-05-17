@@ -52,6 +52,7 @@ const BlogsPage = ({data}) => {
                 <title>Blogs | Pranav Joglekar</title>
                 <meta name="description" content="Pranav Joglekar's Blogs Page. Read Articles written by Pranav Joglekar here"/>
                 <meta name="keywords" content="Pranav Joglekar Portfolio Projects Blog Experience Articles"/>
+                <link rel="canonical" href="https://pranavjoglekarcodes.web.app/blogs"/>
 
                 <meta property="og:title" content="Pranav Joglekar | Blogs"/>
                 <meta property="og:description" content="Pranav Joglekar's blog and portfolio website. Blogs written by Pranav hosted here.

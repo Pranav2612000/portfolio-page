@@ -20,6 +20,7 @@ const ProjectsPage = () => {
           <title>Projects | Pranav Joglekar</title>
           <meta name="description" content="Pranav Joglekar's Work Page. See Pranav's work and projects"/>
           <meta name="keywords" content="Pranav Joglekar Portfolio Projects Blog"/>
+          <link rel="canonical" href="https://pranavjoglekarcodes.web.app/projects"/>
 
           <meta property="og:title" content="Pranav Joglekar | Projects"/>
           <meta property="og:description" content="Pranav Joglekar's portfolio and blog website. Blogs written by Pranav hosted here.

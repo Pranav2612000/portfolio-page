@@ -55,6 +55,7 @@ export default ({ data }) => {
                 <title>{frontmatter.title} | Pranav Joglekar</title>
                 <meta name="description" content={frontmatter.description}/>
                 <meta name="keywords" content={frontmatter.keywords}/>
+                <link rel="canonical" href={`https://pranavjoglekarcodes.web.app/blogs/posts/${data.mdx.slug}`}/>
 
                 <meta property="og:title" content={`${frontmatter.title} | Pranav Joglekar`}/>
                 <meta property="og:description" content={frontmatter.description}/>
