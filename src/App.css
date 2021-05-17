@@ -93,7 +93,8 @@ html {
 }
 
 .blog-render h3 {
-  font: unset; 
+  font-size: 1.3em; 
+  font-weight: bold;
   color: unset;
   text-align: unset;
   padding-top:unset;
