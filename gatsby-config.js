@@ -13,6 +13,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-sitemap",
       options: {
+        output: "/",
         query: 
         `{
             site {
@@ -27,6 +28,7 @@ module.exports = {
               }
             }
           }`,
+        excludes: ["/dev-404-page","/dev-404-page/", "https://pranavjoglekarcodes.web.app/dev-404-page/", "/offline-plugin-app-shell-fallback/","https://pranavjoglekarcodes.web.app/offline-plugin-app-shell-fallback/"],
         resolvePages: ({ site, allSitePage }) => {
           const temp= allSitePage.nodes
             .map((node) => {
@@ -39,11 +41,13 @@ module.exports = {
            return temp;
         },
         serialize: ({path}) => {
+          const lastmodDate = new Date().toISOString().split('T')[0];
+          console.log("date",lastmodDate);
           return {
             url: path,
             changefreq: 'daily',
             priority: 0.7,
-            lastmod: new Date(),
+            lastmod: `${lastmodDate}`
           }
         },
       }
