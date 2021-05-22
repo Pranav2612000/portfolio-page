@@ -20,6 +20,7 @@
     "gatsby": "^2.29.3",
     "gatsby-plugin-google-fonts": "^1.0.1",
     "gatsby-plugin-google-tagmanager": "^3.5.0",
+    "gatsby-plugin-google-tagmanager-delayed": "^2.1.25",
     "gatsby-plugin-image": "^1.5.0",
     "gatsby-plugin-loadable-components-ssr": "^2.1.0",
     "gatsby-plugin-mdx": "^2.5.0",
