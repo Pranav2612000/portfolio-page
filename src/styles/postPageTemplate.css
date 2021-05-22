@@ -1,6 +1,6 @@
 .blog-page-wrapper {
   padding: 12vw 10vw 4vw 10vw;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
 }
 .blog-title {
   margin-bottom:0px;
@@ -9,22 +9,24 @@
 .blog-render {
   white-space: initial;
   word-break: break-word;
-  --bg-color: rgb(38,38,45); 
-  --txt-color: white;
+  --bg-color: #f6f6f6; 
+  --txt-color: rgb(38,38,45); 
 }
 .blog-render-dark {
-  --bg-color: rgba(255,255,255,0.9); 
-  --txt-color: rgb(38,38,45); 
+  --bg-color: #0a2b36;
+  --txt-color: white;
 }
 .blog-render pre {
   border-radius: 10px;
-  background-color: var(--bg-color);
-  color: var(--txt-color);
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
   overflow:auto;
+  background-color: var(--bg-color);
+  /*
+  color: var(--txt-color);
+  */
 }
 
 .blog-render img {

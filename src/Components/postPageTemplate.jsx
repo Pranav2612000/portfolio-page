@@ -1,10 +1,12 @@
 import { graphql, navigate } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../Components/Layout.jsx';
 import Helmet from 'react-helmet'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import hljs from 'highlight.js';
 import "../styles/postPageTemplate.css";
+import "../styles/codeHighlighting.scss";
 
 export const query = graphql
     `
@@ -36,6 +38,9 @@ export const query = graphql
 
 export default ({ data }) => {
     const { frontmatter, body } = data.mdx
+    useEffect(() => {
+        hljs.highlightAll();
+    }, [])
     return (
         <>
             <Layout>
