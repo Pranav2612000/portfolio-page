@@ -42,8 +42,8 @@ export default ({ data }) => {
                 {(mode) => (
                     <>
                         <div className="blog-page-wrapper">
-                            <button onClick={()=>navigate(-1)} className="btn-link"><p>Back to Blogs</p></button>
-                            <GatsbyImage className="blog-card-img" image={getImage(frontmatter.desktop_img)} alt={frontmatter.alt_img}/>
+                            <button onClick={()=>navigate(-1)} className="btn-link"><p>Back to Blogs</p></button><br/>
+                            <GatsbyImage className="blog-title-img" image={getImage(frontmatter.desktop_img)} alt={frontmatter.alt_img}/>
                             <h1 className="blog-title">{frontmatter.title}</h1>
                             <p className="blog-title-date"> by Pranav Joglekar | {frontmatter.date}</p>
                             <div className={`blog-render ${mode? 'blog-render-dark':'' }`}>
