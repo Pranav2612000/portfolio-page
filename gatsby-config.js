@@ -4,7 +4,7 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: "gatsby-plugin-google-tagmanager",
+      resolve: "gatsby-plugin-google-tagmanager-delayed",
       options: {
         id: "GTM-KHW3X7J",
         includeInDevelopment: false,
@@ -93,8 +93,9 @@ module.exports = {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          `Montserrat`,
-          `Shadows Into Light`,
+          `Montserrat\:400`,
+          `Lora\:400`,
+          `Poppins\:400`
         ],
         display: 'swap',
       }
