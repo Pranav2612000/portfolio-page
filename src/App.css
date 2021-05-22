@@ -734,6 +734,11 @@ footer a:hover, .top-sign a:hover {
   z-index:1;
   overflow:hidden;
 }
+.blog-card h3 {
+  padding: 0px;
+  text-align:left;
+  margin:0px;
+}
 .blog-card .date__box {
   opacity: 0;
   transform: scale(0.5);
@@ -914,8 +919,20 @@ footer a:hover, .top-sign a:hover {
     padding: 20vw 10vw 4vw 10vw;
   }
 
+  .blog-card {
+    padding: 0px;
+    margin-bottom: 5vh;
+  }
+  .blog-card .blog-card__background {
+    padding: 0px;
+  }
+
   .blog-card .blog-card__head {
     height: 120px;
+  }
+  .blog-card .blog-card__info {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .mobile-hidden {
