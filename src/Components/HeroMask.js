@@ -1,16 +1,55 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import loadable from '@loadable/component';
-const HeroMask = loadable((props) => import("./HeroMask"));
+import gsap from 'gsap';
 
-function Hero(props) {
+function HeroMask(props) {
+  useEffect(()=> {
+    const hero = document.querySelector('[data-hero]')
+
+    /* Timeline */
+    const tl = gsap.timeline({ delay: 1 })
+
+    tl
+      .to(hero, {
+        '--maskSize1': '20%',
+        duration: 0.5,
+        ease: 'back.out(2)',
+      })
+      .to(hero, {
+        '--maskSize2': '28%',
+        '--maskSize3': 'calc(28% + 0.1rem)',
+        duration: 0.5,
+        delay: 0.5,
+        ease: 'back.out(2)',
+      })
+
+    /* Cursor */
+    window.addEventListener('mousemove', (e) => {
+      const { clientX, clientY } = e
+      const x = Math.round((clientX / window.innerWidth) * 100)
+      const y = Math.round((clientY / window.innerHeight) * 100)
+      
+      gsap.to(hero, {
+        '--x': `${x}%`,
+        '--y': `${y}%`,
+        duration: 0.3,
+        ease: 'sine.out',
+      })
+    })
+    return () => {
+      console.log("removing hero");
+    };
+  }, [])
+
   return (
     <>
-      <div className={props.mode ? "hero-section hero-section-dark" : "hero-section"}>
+      <div className={props.mode ? "hero-section hero-section-dark hero--secondary--dark mobile-hidden" : "hero-section hero--secondary mobile-hidden"}
+      aria-hidden="true" data-hero>
 
         <a href="/#about">
           <div className={props.mode ? "hero-title hero-title-dark" : "hero-title"}>
             <h1>Pranav Joglekar</h1>
-            <h2>A Tech Cognoscente</h2>
+            <h2>Full Stack Developer</h2>
           <div className="code-box">
             <pre>
               <code>
@@ -40,7 +79,7 @@ function Hero(props) {
                 <span className="colon">:</span>{" "}
                 <span className="string">"writing clean and secure code"</span>,
               </code>
-              <code>{"};"}</code>
+              <code>{"}"}</code>
             </pre>
           </div>
           </div>
@@ -69,9 +108,8 @@ function Hero(props) {
           <svg xmlns="http://www.w3.org/2000/svg" width="50" height="60" viewBox="0 0 24 24"><path d="M12 .02c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.99 6.98l-6.99 5.666-6.991-5.666h13.981zm.01 10h-14v-8.505l7 5.673 7-5.672v8.504z"/></svg>        </a>
         </div>
       </div>
-      <HeroMask mode={props.mode}/>
     </>
   )
 }
 
-export default Hero;
+export default HeroMask
