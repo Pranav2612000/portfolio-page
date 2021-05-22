@@ -123,7 +123,7 @@ class Hamburger extends React.Component {
             onStateChange={(state) => this.handleStateChange(state)}
             disableAutoFocus >
             <Link onClick={() => this.closeMenu()} href="/" className="menu-item"><li>Home</li></Link>
-            <Link onClick={() => this.closeMenu()} to="/blogs" className="nav-item"><li>Blog</li></Link>
+            <Link onClick={() => this.closeMenu()} to="/blogs" className="menu-item"><li>Blog</li></Link>
             <Link onClick={() => this.closeMenu()} href="/projects" className="menu-item"><li>Projects</li></Link>
             <Link onClick={() => this.closeMenu()} href="/experience" className="menu-item"><li>Experience</li></Link>
             <a onClick={() => this.closeMenu()} href="/#resume" className="menu-item"><li>Resume</li></a>
@@ -136,7 +136,7 @@ class Hamburger extends React.Component {
             onStateChange={(state) => this.handleStateChange(state)}
             disableAutoFocus >
             <Link onClick={() => this.closeMenu()} href="/" className="menu-item"><li>Home</li></Link>
-            <Link onClick={() => this.closeMenu()} to="/blogs" className="nav-item"><li>Blog</li></Link>
+            <Link onClick={() => this.closeMenu()} to="/blogs" className="menu-item"><li>Blog</li></Link>
             <Link onClick={() => this.closeMenu()} href="/projects" className="menu-item"><li>Projects</li></Link>
             <Link onClick={() => this.closeMenu()} href="/experience" className="menu-item"><li>Experience</li></Link>
             <a onClick={() => this.closeMenu()} href="/#resume" className="menu-item"><li>Resume</li></a>
