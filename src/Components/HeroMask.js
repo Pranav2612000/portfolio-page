@@ -1,9 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import loadable from '@loadable/component';
 import gsap from 'gsap';
 
 function HeroMask(props) {
+  const [mouseMoved, setMouseMoved] = useState(false);
   useEffect(()=> {
+    /* Don't render the animation unless the user interacts with the page(to improve CLS) */
+    if(!mouseMoved) {
+      return;
+    }
+
     const hero = document.querySelector('[data-hero]')
 
     /* Timeline */
@@ -39,11 +45,15 @@ function HeroMask(props) {
     return () => {
       console.log("removing hero");
     };
-  }, [])
+  }, [mouseMoved])
+
+  const handleMouseMove = () => {
+    setMouseMoved(true);
+  }
 
   return (
     <>
-      <div className={props.mode ? "hero-section hero-section-dark hero--secondary--dark mobile-hidden" : "hero-section hero--secondary mobile-hidden"}
+      <div onMouseMove={handleMouseMove} className={props.mode ? "hero-section hero-section-dark hero--secondary--dark mobile-hidden" : "hero-section hero--secondary mobile-hidden"}
       aria-hidden="true" data-hero>
 
         <a href="/#about">
