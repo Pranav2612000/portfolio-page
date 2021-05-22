@@ -898,6 +898,17 @@ footer a:hover, .top-sign a:hover {
 
 /* SMALL SCREEN */
 @media only screen and (max-width: 769px) {
+  .section-wrapper {
+    padding: 20vw 5vw 4vw 5vw;
+  }
+  
+  .single-project {
+    padding: 0px;
+  }
+
+  .email-wrapper a {
+    padding: 0.5em;
+  }
 
   .blog-page-wrapper {
     padding: 20vw 10vw 4vw 10vw;
