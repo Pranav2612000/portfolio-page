@@ -94,8 +94,8 @@ module.exports = {
       options: {
         fonts: [
           `Montserrat\:400`,
-          `Lora\:400`,
-          `Poppins\:400`
+          `Poppins\:400`,
+          `Roboto\:400`
         ],
         display: 'swap',
       }
