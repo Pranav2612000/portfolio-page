@@ -14,6 +14,7 @@ export const query = graphql
             body
             slug
             frontmatter {
+                meta_title
                 title
                 description
                 keywords
@@ -57,11 +58,11 @@ export default ({ data }) => {
                 <meta name="keywords" content={frontmatter.keywords}/>
                 <link rel="canonical" href={`https://pranavjoglekarcodes.web.app/blogs/posts/${data.mdx.slug}`}/>
 
-                <meta property="og:title" content={`${frontmatter.title} | Pranav Joglekar`}/>
+                <meta property="og:title" content={`${frontmatter.meta_title} | Pranav`}/>
                 <meta property="og:description" content={frontmatter.description}/>
                 <meta property="og:url" content={`https://pranavjoglekarcodes.web.app/blogs/posts/${data.mdx.slug}`}/>
                 <meta name="twitter:description" content={frontmatter.description}/>
-                <meta name="twitter:title" content={`${frontmatter.title} | Pranav Joglekar`}/>
+                <meta name="twitter:title" content={`${frontmatter.meta_title} | Pranav`}/>
 
                 <meta property="og:site_name" content={`${frontmatter.title} | Pranav Joglekar`}/>
             </Helmet>
