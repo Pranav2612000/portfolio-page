@@ -1,6 +1,5 @@
 import React from 'react';
 import { StaticImage } from "gatsby-plugin-image"
-import  Pranav from "../assets/Mugshot.jpeg";
 
 function About() {
   return (
@@ -12,7 +11,6 @@ function About() {
           <div className="about-pranav-photo-wrapper">
             <StaticImage
               alt="photo of Pranav"
-              // Assisi, Perúgia, Itália by Bernardo Ferrari, via Unsplash
               src="../assets/Mugshot.jpeg"
               formats={["auto", "webp", "avif"]}
               id="pranav-photo"
