@@ -7,7 +7,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 ];
 const Blogs = (props) => {
   return (
-    <div id="blogs" className="section-wrapper">
+    <div id="blogs" className="blog-page-wrapper">
         <div className="blogs-wrapper">
 
             <h1 className="section-title">Blogs</h1>
