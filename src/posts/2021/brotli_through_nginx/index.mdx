@@ -1,0 +1,236 @@
+---
+meta_title: "Serving Brotli & Gzip through Nginx"
+title: "Enabling gzip and brotli compression with Nginx and React"
+description: "A guide to help you increase your lighthouse score by serving brotli and gzip compressed pages through nginx. Also contains explanation about how to encode your react application builds in brotli and gzip"
+keywords: "nginx brotli gzip brotli-with-nginx gzip-with-nginx lighthouse"
+date: 2021-05-23
+published: true
+desktop_img: ./desktop.png
+alt_img: "Title image containing text Enabling gzip and brotli with nginx"
+---
+
+Picture this - You create a beautiful website in React. It works flawlessly. The transitions are smooth and everyone loves it. You deploy it on the web. You know someone talking about something called the lighthouse score, you decide to check it out and VHAM. The site has very poor performance. A quick google search tells you to use Brotli and Gzip compressions. But you can't find an easy guide to do this with React. Well, let me help you out
+
+## Building the Website
+
+The first step is to create builds which contain files in these format.
+
+### Install with custom webpack configuration
+
+1. install the required webpack plugins and dependencies by running the following scripts
+
+```shell
+npm install --save-dev compression-webpack-plugin
+npm install --save-dev brotli-webpack-plugin
+```
+
+2. modify the webpack.config.json to the following
+  
+  ```javascript
+  const CompressionPlugin = require('compression-webpack-plugin'); //gzip
+  const BrotliPlugin = require('brotli-webpack-plugin'); //brotli
+  ```
+  
+  ```
+  module.exports = {
+    ...
+    plugins: [
+        new CompressionPlugin({ //gzip plugin
+            filename: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: /\.(js|css|html|svg)$/,
+            threshold: 8192,
+            minRatio: 0.8
+        }),
+        new BrotliPlugin({ //brotli plugin
+            asset: '[path].br[query]',
+            test: /\.(js|css|html|svg)$/,
+            threshold: 10240,
+            minRatio: 0.8
+        })
+    ]
+  }
+  ```
+  
+
+### Install with CRA(Create-React-App)
+
+Unfortunately, CRA does not allow us to modify the custom webpack configuration easily. There are ways like `npm run eject` to get out of the CRA ecosystem, but it is not adviced. So I decided to try out the `compress-create-react-app`
+
+1. Install the package
+
+````
+```sh
+npm i compress-create-react-app
+````
+
+2. Modify the build script in package.json
+  
+  ```json
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build && compress-cra",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  }
+  ```
+  
+
+Once these things have been configured, build the app once(`npm run build`). You should now see files with .br and .gzip extensions in the `build` folder. If you don't, you must have missed something, retry the previous steps
+
+## Purging Nginx
+
+We will need to rebuild nginx with brotli support again, so, if you already have nginx installed. Delete it using the following command
+
+```shell
+sudo apt-get purge nginx nginx-common nginx-full
+```
+
+If you find some other dependencies depend on the package, you would need to remove those first
+
+## Downloading Requirements
+
+Next, we'll install the dependencies required for the process
+
+```sh
+sudo apt-get install dpkg-dev build-essential gnupg2 git gcc cmake libpcre3 libpcre3-dev zlib1g zlib1g-
+dev openssl libssl-dev curl unzip -y
+```
+
+Now, we'll install the latest version of nginx. For that, we'll first need to add the nginx repositories to our machine.
+
+- Import the Nginx GPG key required
+  
+  ```sh
+  curl -L https://nginx.org/keys/nginx_signing.key | apt-key add -
+  ```
+  
+- Add the Nginx Repository. Open the file `/etc/apt/sources.list.d/nginx.list`and add the following lines
+  
+  ```sh
+  deb http://nginx.org/packages/ubuntu/ focal nginx
+  deb-src http://nginx.org/packages/ubuntu/ focal nginx
+  ```
+  
+- Update the repository
+  
+  ```shell
+  apt-get update -y
+  ```
+  
+- cd to `/usr/local/source` and download source
+  
+  ```sh
+  apt-get source nginx
+  ```
+  
+- Download the latest version of Brotli from the Git repository(Again in the `/usr/local/src` folder)
+  
+  ```sh
+  git clone --recursive https://github.com/google/ngx_brotli.git
+  ```
+  
+
+## Building Nginx
+
+Let us now move on to building nginx. Install the build dependencies by the following command
+
+```sh
+apt-get build-dep nginx -y
+```
+
+Edit the debian/rules file in the nginx source folder. Use this command to open the file
+
+```shell
+cd /usr/local/src/nginx-*/
+nano debian/rules
+```
+
+and add the following to the `./configure`command under the `config.env.nginx` and `config.env.nginx_debug`
+
+```sh
+--add-module=/usr/local/src/ngx_brotli
+```
+
+Now, we'll build and install nginx in the system.
+
+Use the following command to build nginx for your system
+
+```sh
+dpkg-buildpackage -b -uc -us
+```
+
+If you get an unmet dependencies error. e.g
+
+```sh
+error: Unmet build dependencies: debhelper
+```
+
+run
+
+```sh
+sudo apt-get installl <unmet-dependency-name>
+```
+
+to install the dependency and fix the error.
+
+After the build completes, verify that it has created .deb files in the /usr/local/src directory.
+
+If you have these files, install nginx by running
+
+```sh
+dpkg -i /usr/local/src/*.deb
+```
+
+After installtion run, `nginx -v` to verify nginx was installed succesfully
+
+## Configuring Nginx with Gzip & Brotli Support
+
+Now let's move on to the final section, where we'll configure nginx to serve files using gzip and brotli
+
+Open the nginx configuration file
+
+```shell
+nano /etc/nginx/nginx.conf
+```
+
+and add the following lines inside the http section
+
+```nginx
+gzip on;
+gzip_vary on;
+gzip_proxied any;
+gzip_comp_level 6;
+gzip_types text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml;
+
+brotli on;
+brotli_comp_level 6;
+brotli_static on;
+brotli_types text/plain text/css application/javascript application/x-javascript text/xml 
+application/xml application/xml+rss text/javascript image/x-icon 
+image/vnd.microsoft.icon image/bmp image/svg+xml;
+```
+
+These configurations allow nginx to serve files using gzip and brotli compressions.
+
+Save this file and test if the configuration is valid using
+
+```sh
+nginx -t
+```
+
+If you get a successful message, start the nginx server to serve the files
+
+```shell
+sudo systemctl start nginx
+```
+
+Verify that the server is running, using
+
+```sh
+sudo systemctl status nginx
+```
+
+To verify if compressed files are being served, go to the networkt tab in your browser and inspect the headers of the files being downloaded. If you find the Content-Encoding header with a value of br(brotli) or gzip, Congrats- You have successfully enabled brotli compression.
+
+Checkout the Lighthouse score now. It definitely should have improved
