@@ -1,7 +1,7 @@
 ---
 meta_title: "Advanced Git Tips"
 title: "Advanced Git Workflows"
-description: "Want to be a git-wizard? Here are some advanced git tricks which will save your time. Learn how to move commits from one branch to another, restore deleted commits and committing only a part of a modified file"
+description: "Want to be a git-wizard? Here are some advanced git tricks which will save your time. Learn how to move commits from one branch to another, restore deleted commits and commit only a part of a modified file"
 keywords: "git advanced moving commits between branches recovering changes parts of file"
 date: 2021-06-11
 published: true
@@ -21,7 +21,7 @@ git log
 ```
 
 
-[<img class="center w-500" src="http://localhost:8000/posts/git_tricks_1/sha_eg.webp" width="50"/>](http://localhost:8000/posts/git_tricks_1/sha_eg.webp) 
+[<img class="center w-500" src="http://pranavjoglekarcodes.web.app/posts/git_tricks_1/sha_eg.webp" width="50"/>](http://pranavjoglekarcodes.web.app/posts/git_tricks_1/sha_eg.webp) 
 
 The large alphanumeric strings(highlighted in red in the above image) you see are the commit IDs
 
@@ -30,7 +30,7 @@ The large alphanumeric strings(highlighted in red in the above image) you see ar
 ## Q. I committed code into a different branch
 
 ### Scenario:
-You encounterd a production issue. Immediately you stopped doing whatever you were working on and start fixing the bug. After fixing the bug you observe you fixed the bug on a different branch. Now you want to move a certain number of commits from a branch A to branch B.
+You encountered a production issue. Immediately you stopped doing whatever you were working on and started fixing the bug. After fixing the bug you observe that you fixed the bug on a different branch. Now you want to move a certain number of commits from a branch A to branch B.
 
 ### Solution
 To move a small number of commits from A to B, use the `git cherry-pick` command
@@ -61,7 +61,7 @@ Branch B
 
 F ----- G ----- H ----- Q ----- R
 
-Basically, we first checkout to the branch where we want to add the commits, and cherry-pick the commits we want to move, in the order in which they appear in the first branch. Ensuring that the commits being cherry-picked is important or can result in complications.
+Basically, we first checkout to the branch where we want to add the commits, and cherry-pick the commits we want to move, in the order in which they appear in the first branch. Ensuring that the commits being cherry-picked are in sequential order is important or can result in complications.
 
 Like I said, this method works if the number of commits is small, but to move a large number of commits we can use a better method
 
@@ -87,11 +87,15 @@ These two tricks should be enough for moving commits between branches.
 You were trying to learn some new git commands - rebase/reset etc. In the tutorial, there was also a command which asked you to force push something. After trying these out, you observe that some code commited in one commit is missing. The missing piece implemented a critical feature, and you don't have the time to rewrite again.
 
 ### Solution:
-Dont worry. Git doesn't forget things committed in its memory, unlike us humans. You have a high chance of recovering it if its committed. If not, I am sorry, my friend.( That is why you should commit often and commit early)
+Dont worry. Git doesn't forget things committed in its memory, unlike us humans. You have a high chance of recovering it if its committed. If you didn't commit it, I am sorry, my friend.( That is why you should commit often and commit early)
 
-Run `git reflog` to see a list of all commits, and their hashes (reflog displays all changes that update the `HEAD`). If you want the dates of each commit use `git reflog --date=iso`
+Run 
+```git
+git reflog
+```
+to see a list of all commits, and their hashes (reflog displays all changes that update the `HEAD`). If you want the dates of each commit use `git reflog --date=iso`
 
-[<img class="center w-800" src="http://localhost:8000/posts/git_tricks_1/reflog_eg.webp" width="50"/>](http://localhost:8000/posts/git_tricks_1/reflog_eg.webp) 
+[<img class="center w-800" src="http://pranavjoglekarcodes.web.app/posts/git_tricks_1/reflog_eg.webp" width="50"/>](http://pranavjoglekarcodes.web.app/posts/git_tricks_1/reflog_eg.webp) 
 
 Now use `git checkout <hash>`to move to the commits and find your commit. Note that at this moment you HEAD is at a detached state, that means it is at a commit to which no branch points to.
 
@@ -100,10 +104,10 @@ When you find the correct commit, execute `git checkout -b recovery` This will c
 ## Q. I leaked(or was about to leak) a secret
 
 ### Scenario:
-Does this require explanation? I am sure everyone has mistakenly pushed some secrets/keys to a public version control.
+Does this require an explanation? I am sure everyone has mistakenly pushed some secrets/keys to a public version control.
 
 ### Solution:
-Dont panic! Everyone makes mistakes.( If your boss says he has never made this mistake. He's lying). The important thing to understand is that the key is out, and you are never safe, more so if it was a public repo. The best course of action is to change the keys and delete the repo. Nevertheless, for completeness, to remove the keys from your history you can do the following -
+Dont panic! Everyone makes mistakes.( If your boss says he has never made this mistake. He's lying). The important thing to understand is that the key is out, and you are never safe, more so if it was a public repo. The best course of action is to change the keys and delete the repo. Nevertheless, for completeness, if you want to remove the keys from your repository history you can do the following -
 
 The first step is to remove the keys from version control. Unfortunately, the simple solution of just modifying the values again and pushing the code is not going to work because git stores everything in its history, and the secret would always stay there. The only way to delete the key is to rewrite the history.
 
