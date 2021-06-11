@@ -1,0 +1,179 @@
+---
+meta_title: "Advanced Git Tips"
+title: "Advanced Git Workflows"
+description: "Want to be a git-wizard? Here are some advanced git tricks which will save your time. Learn how to move commits from one branch to another, restore deleted commits and committing only a part of a modified file"
+keywords: "git advanced moving commits between branches recovering changes parts of file"
+date: 2021-06-11
+published: true
+desktop_img: ./desktop.png
+alt_img: "Image containg multiple git logos as background"
+---
+
+First in a series of blog posts about advanced git tricks to prevent you from rewriting or copy pasting code.
+
+## Preliminaries
+
+This article assumes you have a grip over basic git commands, and understand how git works.
+
+It also has a large reliance on commit IDs or SHA or commit hash or hash. These are unique identifiers given to each commit, so that git can internally uniquely identify each commit. To find out the hashes, you can run 
+```git
+git log
+```
+
+
+[<img class="center w-500" src="http://localhost:8000/posts/git_tricks_1/sha_eg.webp" width="50"/>](http://localhost:8000/posts/git_tricks_1/sha_eg.webp) 
+
+The large alphanumeric strings(highlighted in red in the above image) you see are the commit IDs
+
+
+#### Let us now look at some common git related questions :-
+## Q. I committed code into a different branch
+
+### Scenario:
+You encounterd a production issue. Immediately you stopped doing whatever you were working on and start fixing the bug. After fixing the bug you observe you fixed the bug on a different branch. Now you want to move a certain number of commits from a branch A to branch B.
+
+### Solution
+To move a small number of commits from A to B, use the `git cherry-pick` command
+
+Say, you have the following branches
+
+#### Branch A
+
+P ----- Q ----- R ------ S
+
+#### Branch B
+
+F ----- G ----- H
+
+(Note: P, Q, R, S, F, G, H are all commit hashes/ids)
+
+and you want to move commits Q & R to B(in front of H). You can do the following by
+
+```git
+git checkout branchB
+git cherry-pick Q
+git cherry-pick R
+```
+
+This will result in
+
+Branch B
+
+F ----- G ----- H ----- Q ----- R
+
+Basically, we first checkout to the branch where we want to add the commits, and cherry-pick the commits we want to move, in the order in which they appear in the first branch. Ensuring that the commits being cherry-picked is important or can result in complications.
+
+Like I said, this method works if the number of commits is small, but to move a large number of commits we can use a better method
+
+```git
+git checkout <branchname where commits are to be moved>
+git rebase --onto <SHA of most recent commit in branchB> <SHA of the commit before the commit that is to be moved> <SHA of the last commit that is to be moved>
+git rebase HEAD <branchname where commits are to be moved>
+```
+
+So, for the above example - moving Q & R to branch B, the commands would be
+
+```git
+git checkout branchB
+git rebase --onto H P R
+git rebase HEAD branchB
+```
+
+These two tricks should be enough for moving commits between branches.
+
+## Q. I don't know what I did, but I lost my changes
+
+### Scenario:
+You were trying to learn some new git commands - rebase/reset etc. In the tutorial, there was also a command which asked you to force push something. After trying these out, you observe that some code commited in one commit is missing. The missing piece implemented a critical feature, and you don't have the time to rewrite again.
+
+### Solution:
+Dont worry. Git doesn't forget things committed in its memory, unlike us humans. You have a high chance of recovering it if its committed. If not, I am sorry, my friend.( That is why you should commit often and commit early)
+
+Run `git reflog` to see a list of all commits, and their hashes (reflog displays all changes that update the `HEAD`). If you want the dates of each commit use `git reflog --date=iso`
+
+[<img class="center w-800" src="http://localhost:8000/posts/git_tricks_1/reflog_eg.webp" width="50"/>](http://localhost:8000/posts/git_tricks_1/reflog_eg.webp) 
+
+Now use `git checkout <hash>`to move to the commits and find your commit. Note that at this moment you HEAD is at a detached state, that means it is at a commit to which no branch points to.
+
+When you find the correct commit, execute `git checkout -b recovery` This will create a new branch named recovery, which contains the recovered commit. You can now merge/rebase these commits to the appropriate location.
+
+## Q. I leaked(or was about to leak) a secret
+
+### Scenario:
+Does this require explanation? I am sure everyone has mistakenly pushed some secrets/keys to a public version control.
+
+### Solution:
+Dont panic! Everyone makes mistakes.( If your boss says he has never made this mistake. He's lying). The important thing to understand is that the key is out, and you are never safe, more so if it was a public repo. The best course of action is to change the keys and delete the repo. Nevertheless, for completeness, to remove the keys from your history you can do the following -
+
+The first step is to remove the keys from version control. Unfortunately, the simple solution of just modifying the values again and pushing the code is not going to work because git stores everything in its history, and the secret would always stay there. The only way to delete the key is to rewrite the history.
+
+For simplicity, I am assuming your latest commit is the one that added the secret. If it was an older commit, you'll need to use some rebase magic.(DM me if you need help with this).
+
+The first thing now, is to remove the secret from the code. Once that is completed, you need to add the file to the staging area and run 
+```git
+git commit --amend
+```
+
+This will modify the contents of your latest commit(The one exposing the key, in this case). After committing you'll observe that it doesn't allow you to push. What this says is that if you push this, it may overwrite something on the main repository. Since, right now, we want the password to be overwritten we do a force push using `git push -f`
+
+Done, right? No. Not yet. Remember the question above, where we can bring backs commits which have been lost? Yes. A determined attacker can still be able to find out the password. So let's clean all our tracks
+
+```git
+git gc --prune=now --aggressive
+```
+
+Tip: If you have leaked AWS keys, there is a high possibility that AWS will found out about the leak and may even temporarily suspend your account(Happened to me :) ). So, if you have leaked your AWS keys, immediately change them and keep an eye on the AWS Support Mail.
+
+## Q. I have multiple changes in 1 file. But I want to break them into different commits
+
+### Scenario:
+I have multiple changes in a single file, but I want to commit these in multiple files.
+
+### Solution:
+Well, everyone must be knowing the `git add` command to add a file to staging area. Now let me introduce its cousin on drugs - `git add --patch(or -p)<filename>`
+
+Once you run this on a file, git will automatically break the file into (c)"hunks"(or what it thinks are hunks) and provide you with a long list of choices -
+
+```bash
+Stage this hunk [y,n,q,a,d,/,j,J,g,s,e,?]?
+```
+
+y - stage this hunk for the next commit - Use this to add the current hunk to the staging area
+
+n - do not stage this hunk for the next commit - Use this to ignore this hunk
+
+q - quit; do not stage this hunk or any of the remaining hunks
+
+a - stage this hunk and all later hunks in the file
+
+d - do not stage this hunk or any of the later hunks in the file
+
+g - select a hunk to go to
+
+/ - search for a hunk matching the given regex
+
+j - leave this hunk undecided, see next undecided hunk
+
+J - leave this hunk undecided, see next hunk
+
+k - leave this hunk undecided, see previous undecided hunk
+
+K - leave this hunk undecided, see previous hunk
+
+s - split the current hunk into smaller hunks
+
+e - manually edit the current hunk
+
+? - print hunk help
+
+Use the above commands to navigate through the hunks and add the required portions to the staging area. Once done, you can verify the code that is going to be commited using `git diff --staged` After confirming that the right code is being commited, you can commit the code.
+
+That's it for this post. Leave me a feedback(to motivate me to write the next part) - let me know if you want to learn about how I use git in different scenarios
+
+### References
+
+[Moving commits between branches · GitHub](https://gist.github.com/unbracketed/889c844473bcca1917e2)
+
+https://stackoverflow.com/questions/10099258/how-can-i-recover-a-lost-commit-in-git
+
+[Commit only part of a file in Git - Stack Overflow](https://stackoverflow.com/questions/1085162/commit-only-part-of-a-file-in-git#:~:text=You%20can%20use%20git%20add,g%2Cs%2Ce%2C%3F%5D%3F)
