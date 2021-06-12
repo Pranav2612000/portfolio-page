@@ -26,6 +26,5 @@ if (require.main === module) {
   });
 } else {
   console.log("here too");
-    fastify.log.info(`server listening on h`);
   module.exports = init;
 }
