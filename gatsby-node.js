@@ -1,5 +1,13 @@
 const path = require('path')
+require('dotenv').config();
 const { createFilePath } = require(`gatsby-source-filesystem`);
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = process.env.MONGO_URI;
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
@@ -49,6 +57,20 @@ exports.modifyWebpackConfig = ({ config, stage }) => {
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
+  let db;
+  console.log("connecting to MongoDB");
+  await client.connect();
+  db = client.db("personalSite");
+  console.log("Uploading blog data");
+
+  const blogs = db.collection('blogs');
+
+  try {
+  } catch(err) {
+    console.log("Unable to add to mongodb");
+    console.log(err);
+  }
+
   const result = await graphql
   (`
       query {
@@ -56,6 +78,18 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               edges {
                   node {
                       id
+                      frontmatter {
+                        id
+                        title
+                        date
+                        description
+                        alt_img
+                        desktop_img {
+                          id
+                          name
+                          extension
+                        }
+                      }
                       fields {
                           slug
                       }
@@ -72,7 +106,16 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Create blog post pages.
   const posts = result.data.allMdx.edges
 
-  posts.forEach(({ node }, index) => {
+  await posts.forEach(async ({node}) => {
+      try {
+        await blogs.findOneAndUpdate({"id": node.frontmatter.id}, {$set: node.frontmatter}, {upsert: true});
+      } catch(err) {
+        console.log("Error uploading blog data to db");
+        console.log(err);
+      }
+  }); 
+
+  posts.forEach(async ({ node }, index) => {
       createPage({
           path: node.fields.slug,
           component: path.resolve(`./src/Components/postPageTemplate.jsx`),
