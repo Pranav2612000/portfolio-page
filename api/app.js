@@ -27,11 +27,13 @@ function init() {
 
   app.get('/.netlify/functions/server/getBlogs', async function (request, reply) {
 
+    console.log(db);
     if(!db || !db.serverConfig.isConnected()) {
       console.log("connecting to MongoDB");
       await client.connect();
+    } else {
+      console.log("using cached mongo connection");
     }
-    console.log("using cached mongo connection");
 
     try {
       db = client.db("personalSite");
@@ -42,6 +44,7 @@ function init() {
 
       const blogs = [];
       await blogsCursor.forEach((x) => {
+        console.log(x);
         blogs.push(x);
       });
       reply.send({success: blogs});
