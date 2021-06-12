@@ -1,18 +1,25 @@
 require('dotenv').config();
+const fastify = require('fastify');
 const PORT = process.env.PORT;
 
-const fastify = require('fastify')({
-  logger: true
-});
+function init() {
+  const app = fastify({logger: true});
+  app.get('/', function (request, reply) {
+    reply.send({ hello: 'world' });
+  });
+  return app;
+}
 
-fastify.get('/', function (request, reply) {
-  reply.send({ hello: 'world' });
-});
 
-fastify.listen(PORT, function (err, address) {
-  if (err) {
-    fastify.log.error(err);
-    process.exit(1);
-  }
-  fastify.log.info(`server listening on ${address}`);
-});
+if (require.main === module) {
+  const fastify = init();
+  fastify.listen(PORT, function (err, address) {
+    if (err) {
+      fastify.log.error(err);
+      process.exit(1);
+    }
+    fastify.log.info(`server listening on ${address}`);
+  });
+} else {
+  module.exports = init;
+}
