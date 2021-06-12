@@ -13,7 +13,7 @@ function init() {
 
 if (require.main === module) {
   const fastify = init();
-  fastify.listen(PORT, function (err, address) {
+  fastify.listen(PORT, '0.0.0.0', function (err, address) {
     if (err) {
       fastify.log.error(err);
       process.exit(1);
