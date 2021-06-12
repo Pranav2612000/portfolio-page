@@ -27,7 +27,6 @@ function init() {
 
   app.get('/.netlify/functions/server/getBlogs', async function (request, reply) {
 
-    console.log(db);
     if(!db || !db.serverConfig.isConnected()) {
       console.log("connecting to MongoDB");
       await client.connect();
@@ -44,9 +43,9 @@ function init() {
 
       const blogs = [];
       await blogsCursor.forEach((x) => {
-        console.log(x);
         blogs.push(x);
       });
+      client.close();
       reply.send({success: blogs});
     } catch(err) {
       console.log(err);
