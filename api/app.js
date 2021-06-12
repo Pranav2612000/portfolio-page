@@ -4,10 +4,6 @@ const PORT = process.env.PORT;
 
 const MongoClient = require('mongodb').MongoClient;
 const uri = process.env.MONGO_URI;
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
 
 function init() {
 
@@ -27,6 +23,10 @@ function init() {
 
   app.get('/.netlify/functions/server/getBlogs', async function (request, reply) {
 
+    const client = new MongoClient(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
     if(!db || !db.serverConfig.isConnected()) {
       console.log("connecting to MongoDB");
       await client.connect();
