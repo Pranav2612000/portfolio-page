@@ -4,10 +4,13 @@ const PORT = process.env.PORT;
 
 function init() {
   const app = fastify({logger: true});
+  app.get('/', function (request, reply) {
+    reply.send({ hello: 'world' });
+  });
   app.get('/server', function (request, reply) {
     reply.send({ hello: 'world' });
   });
-  app.get('/', function (request, reply) {
+  app.get('/.netlify/functions/server', function (request, reply) {
     reply.send({ hello: 'world' });
   });
   return app;
