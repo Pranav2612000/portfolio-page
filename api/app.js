@@ -5,10 +5,17 @@ const PORT = process.env.PORT;
 const MongoClient = require('mongodb').MongoClient;
 const uri = process.env.MONGO_URI;
 
+const registerPlugins = async (app) => {
+  app.register(require('fastify-express'))
+  .then((app) => {
+    app.use(require('cors')())
+  })
+}
+
 function init() {
 
   const app = fastify({logger: true});
-
+  registerPlugins(app);
   const MongoClient = require('mongodb').MongoClient;
   const uri = process.env.MONGO_URI;
   let client = new MongoClient(uri, {

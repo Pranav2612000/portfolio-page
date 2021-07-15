@@ -12,9 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "aws-lambda-fastify": "^1.6.0",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "dotenv-safe": "^8.2.0",
     "fastify": "^3.17.0",
+    "fastify-express": "^0.3.3",
     "mongodb": "^3.6.9",
     "netlify-lambda": "^2.0.8",
     "webpack-node-externals": "^3.0.0"
