@@ -46,7 +46,7 @@ function init() {
         blogs.push(x);
       });
       client.close();
-      reply.send({success: blogs});
+      reply.header("Access-Control-Allow-Origin", "*").send({success: blogs});
     } catch(err) {
       console.log(err);
       reply.send({err: err});
