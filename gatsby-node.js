@@ -85,9 +85,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                         description
                         alt_img
                         desktop_img {
-                          id
-                          name
-                          extension
+                          childImageSharp {
+                              gatsbyImageData(
+                                  height:400,
+                                  width:850,
+                                  placeholder: BLURRED
+                                  formats: [AUTO, WEBP, AVIF]
+                              )
+                          }
                         }
                       }
                       fields {
@@ -108,7 +113,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   await posts.forEach(async ({node}) => {
       try {
-        await blogs.findOneAndUpdate({"id": node.frontmatter.id}, {$set: node.frontmatter}, {upsert: true});
+        await blogs.findOneAndUpdate({"id": node.frontmatter.id}, {$set: { ...node.frontmatter, slug: node.fields.slug}}, {upsert: true});
       } catch(err) {
         console.log("Error uploading blog data to db");
         console.log(err);
