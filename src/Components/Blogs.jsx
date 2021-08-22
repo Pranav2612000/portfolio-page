@@ -5,6 +5,17 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
+
+const compare = (a,b) => {
+    if( new Date(a.date) > new Date(b.date) ) {
+        return -1;
+    }
+    if( Date(a.date) < Date(b.date) ) {
+        return +1;
+    }
+    return 0;
+};
+
 const Blogs = (props) => {
   const [blogs, setBlogs] = useState([]);
   useEffect(() => {
@@ -16,7 +27,7 @@ const Blogs = (props) => {
             }
         });
         const resData = await res.json(); 
-        setBlogs(resData.success);
+        setBlogs(resData.success.sort(compare));
       };
 
       getBlogs();
@@ -27,7 +38,7 @@ const Blogs = (props) => {
 
             <h1 className="section-title">Blogs</h1>
 
-            {blogs.length === 0 && props.data.allMdx.nodes.slice(0,3).map(({ excerpt, frontmatter, fields }) => (
+            {blogs.length === 0 && props.data.allMdx.nodes.sort(compare).slice(0,3).map(({ excerpt, frontmatter, fields }) => (
                 <>
                         <article className="blog-card">
                                     <div className={`blog-card__background ${props.mode ? 'blog-card__dark-background': ''}`}>
