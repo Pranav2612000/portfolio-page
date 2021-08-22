@@ -1,0 +1,68 @@
+---
+id: "incident_of_indolent_otps"
+meta_title: "The Case of Indolent OTPs"
+title: "The Case of Indolent OTPs"
+description: "A story about my experience with conducting student body elections at my university, the problem we faced during the elections and how we solved it"
+keywords: "otp college-elections elections university coep"
+date: 2021-08-22
+published: true
+desktop_img: ./desktop.png
+alt_img: "a skeleton waiting for OTP to arrive"
+---
+
+Last month, I had an expererience which strengthened my belief in Murphy's Law - Whatever that can go wrong will go wrong.
+
+I was the lead developer for an election application built by a group of students to elect our university's student heads. It was a very ordinary application - Basic CRUD operations for creating & approving candidates and allowing students to vote for their favourite candidate. Since we humans shun simplicity, an odd requirement of students requiring OTP verification before casting their vote was requested by the university. To complicate matters the voting process was to be kept open for only 30 minutes in which around 4000 students would be casting their votes. And although the university was ready to allot funds for hosting and other services, the procedure for requesting funds and the deadline to have the platform ready made it impossible to get any form of monetary support.
+
+We had a very banal architecture - A Go microservice for connecting with our university's ldap and authenticating users.  
+( We experimened with both NodeJS and Go and found Go to be much faster ), an express backend microservice, a frontend microservice, a database microservice( later shifted to Atlas free tier) and a Nginx loadbalancer for routing. Since we were on a tight budget( or no budget), we couldn't afford an emailing service like SES and had to write a custom emailer which used our private university account for sending the emails.(You see where this is going)
+
+We had to deploy all these microservices on a single  8 gb machine alloted to us. Worse, the machine was atleast 5 years old running Ubuntu 16. This, along with the fact that my university network is notorius for crashing every year during our Credit Registration made the task seem impossible.
+
+Inspite of these drawbacks, we decided to take it up as a challenge - to prove to the college authorities that the reason for all the website crashes caused by them is not the poor hardware( although it is garbage), but the suboptimal code that is running on it.
+
+We put up our best team on the task and had the application ready in a few weeks( leaving aside the time when we had some short breaks and one very long break where we didn't work). We had a couple of meetings with the institute authorities and the changes suggested by them were swiftly incorporated. After a couple of demonstrations the project was approved, and it was decided to conduct the elections in 1 week. ( The college needed the candidates in 1 week for some bureaucratic reasons)
+
+Once again having no other option we had the site ready in 2 days and conducted multiple mock elections to test out the site. Once the final setup was done, we decided to a stress test to check how many concurrent our server will be able to hold, since none of our mocks resembled the loads we were able to handle.
+
+We used the classic Apache Benchmark Tool to make concurrent requests on the /vote api to see how many users were able to vote concurrently.  
+4000 total requests with 100 requests per second ran with 80 % requests completing in less than 10 seconds - Not bad, considering that the bottleneck wasn't our server, but the Atlas Free Tier DB which was able to handle only 60 ops per second.
+
+Next, I decided to test our LDAP Authentication Service. It was able to handle around 100 parallel requests with ease, so we decided to try around 500 parallel requests. Not a smart decision in hindsight, considering we weren't expecting that traffic. 500 concurrent requests broke our college server. Yup, I did a DOS Attack on my university, taking down its primal authentication service. Once I recovered from this shock, I found out that it would take around 30 mins for the service to restart.
+
+The next item on the testing agenda was testing the email service - whether or not it is able to send 4000 emails in 30 minutes. But since the authentication server was down, we would have to wait for half an hour to test it out. Also, it was already late 2am.  
+And we made the decision of not testing it out.
+
+Maybe it was the sleepy 2am brain, or the (over)confidence in our application, or the fact that nothing had been wrong until then, or the flawed logic that Microsoft servers would be able to handle   the increased demand. When I think back, a quick 15 minute test could have prevented us from the mishap that was about to unfold...
+
+The next day I woke up early and went to my university to observe the elections from the hot seat. I felt like a scientist watching a rocket being launched on large monitor screens. The elections were to be held from 1 to 1:30. I was the only one on site and the rest of the team would be joining remotely  We were all set by 12:50 and verified that all our systems were in place.
+
+Website up .... Check  
+Authentication Service Up ..... Check  
+A Video Call to help voters facing problems .... Set up
+
+Finally, I started the countdown at 10 seconds before 1 and ecstatically shouted "We're live guys". The first 10 minutes went without any problems. The number of votes were gradually increasing. Our logs showed people were logging in. There were a couple of students complaining about not receiving the OTP, but my team calmly explained that this may be due to increased load, and asked them to check spam or try again. After around 10 mins, this number started increasing exponentially. Suddenly, someone from my team observed that the number of votes was stuck at 200 and all hell broke lose....
+
+The first indication that something was wrong when I could hear the continuous beeps of new participants joining the meeting we had set up to help voters. There were almost 200 students there, many more in the lobby and all of them were facing the same issue - They werent receiving the OTPs in time.  Eveyone on the team was panicking. And in this confused state the only advice we could give to the students was to retry again, which further exacerbated the problem.
+
+Once the initial shock had faded a bit, we got back to work. I spoke with the Faculty In Charge to increase the election time to 2. My co workers were trying to pacify the voters and trying to debug the issue. we predicted that the reason the OTPs werent being sent was because the mail servers werent able to handle our capacity. We came up with a solution of increasing the OTP entering time.
+
+Our best developer at the moment would be doing this change, directly in production, because we had no time. I would be speaking to our data center to see if there was a possibily of them aiding in this matter. The others would be searching the web if there was some other solution. This was the best strategy we could come up with at the moment. I ended the call, promising to join back in 15 minutes with good news.
+
+I sprinted to our data center which is at the other side of the campus(500ms) kicking open the door. Inside was a typical IT guy, arched across a monitor screen, most likely playing solaitaire with a couple of server racks behind him. I approached him and hurriedly started explaining to him the problem.  I had barely started explaining the problem to him when he replied in his typical monotous voice, without even looking up from his screen " I am unable to help. Its in the cloud ". I waited there a minute to see if he had any more insights to offer. When he didnt  flinch his eyes from the computer screen for a whole minute. i knew I was wasting my time and decided to leave.
+
+It was almost 1:45pm, 15 mins before the closing time. We only had received 200 votes, which meant the election would be called off and declared void( Atleast 25% voters needs to vote for it to be valid). We were already being mocked at by students across the university. Another club had made memes on us.  The reputation of our club was tarnished. I was receiving 100s of mails from students saying they werent able to login and there were easily double this students in the support video call saying they werent receiving OTPs on time.
+
+Suddenly I had an epiphany. I checked the time of the emails I received. They were delivered within 1 minute. This meant that the mail server was running flawlessly. This meant our whole premise of the web server being overused was flawed and we had to change our debugging direction. Someone had an idea to try out a different email address for sending mails. We quickly replaced the email id ( directly in production, because there was no time ) and sent the OTP. it was 1:53 by then. If this didn't work, it was over. Suddenly my thinking was interrupted by the noise of a sweet email displaying the most beautiful 6 digit number I have seen.
+
+We erupted in a loud shout, happy that atleast the bug had been found and temporarily resolved. I immediately called the Faculty Incharge informing him that the isaue had been fixed and students could start voting again. I requested him to increase the time to 3 and then immediately got back to work after the call. The battle had been won, but we still needed to win the war. We had a 10 minute window before this email exhausted and the OTPs stopped again.
+
+We would've needed atleast 6 other emails to make the OTP service run till the end of elections. I frantically reached out to everyone involved with the project asking them to share their university account credentials. In the meanwhile we decided to write a simple script which randomly picked an account for sending the email, in order to distribute the load, again, directly in production. I know its risky, but that's what makes it fun.
+
+During this time, the number of votes was gradually increasing which was reassuring because it denoted that our fix was working. Once we had multiple credentials and the script in place we did the required changes to our code and redeployed the server. It was around 2:15 then.
+
+Luckily, everything went smoothly from here on. We were continuosly monitoring the number of votes and our server resources to look for irregularities which never came. The number of users in the support meeting also gradually decreased. Finally at 3, 50% of the participants had voted, but we still decided to extend the time to 3:30 to allow everyone to vote.
+
+We ended the elections at 3:30 and I felt a sense of accomplishment. Yes, it did not go as planned and Yes, it could have been much better, but I am happy with the fact that we were able to rise up to the occasion, Think calmly and come up with a working solution, all under immense stress. A huge shoutout to the amazing team.
+
+So guys, test that feature out, even if you are very confident it'll work. You never know the 15 minute efforts can save you 15 hours of work later. Something will always go wrong. It always does. Because whatever that can go wrong will go wrong.
