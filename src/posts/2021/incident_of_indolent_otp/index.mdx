@@ -2,7 +2,7 @@
 id: "incident_of_indolent_otps"
 meta_title: "The Case of Indolent OTPs"
 title: "The Case of Indolent OTPs"
-description: "A story about my experience with conducting student body elections at my university, the problem we faced during the elections and how we solved it"
+description: "A story about my experience with conducting student body elections at my university, the problem we faced during the elections and how we resolved it"
 keywords: "otp college-elections elections university coep"
 date: 2021-08-22
 published: true
@@ -10,7 +10,7 @@ desktop_img: ./desktop.png
 alt_img: "a skeleton waiting for OTP to arrive"
 ---
 
-Last month, I had an expererience which strengthened my belief in Murphy's Law - Whatever that can go wrong will go wrong.
+Last month, I had an expererience which strengthened my belief in Murphy's Law - Anything that can go wrong will go wrong.
 
 I was the lead developer for an election application built by a group of students to elect our university's student heads. It was a very ordinary application - Basic CRUD operations for creating & approving candidates and allowing students to vote for their favourite candidate. Since we humans shun simplicity, an odd requirement of students requiring OTP verification before casting their vote was requested by the university. To complicate matters the voting process was to be kept open for only 30 minutes in which around 4000 students would be casting their votes. And although the university was ready to allot funds for hosting and other services, the procedure for requesting funds and the deadline to have the platform ready made it impossible to get any form of monetary support.
 
@@ -23,7 +23,7 @@ Inspite of these drawbacks, we decided to take it up as a challenge - to prove t
 
 We put up our best team on the task and had the application ready in a few weeks( leaving aside the time when we had some short breaks and one very long break where we didn't work). We had a couple of meetings with the institute authorities and the changes suggested by them were swiftly incorporated. After a couple of demonstrations the project was approved, and it was decided to conduct the elections in 1 week. ( The college needed the candidates in 1 week for some bureaucratic reasons)
 
-Once again having no other option we had the site ready in 2 days and conducted multiple mock elections to test out the site. Once the final setup was done, we decided to a stress test to check how many concurrent our server will be able to hold, since none of our mocks resembled the loads we were able to handle.
+Once again having no other option we had the site ready in 2 days and conducted multiple mock elections to test out the site. Once the final setup was done, we decided to a stress test to check how many concurrent users our server will be able to hold, since none of our mocks resembled the loads we were able to handle.
 
 We used the classic Apache Benchmark Tool to make concurrent requests on the /vote api to see how many users were able to vote concurrently.  
 4000 total requests with 100 requests per second ran with 80 % requests completing in less than 10 seconds - Not bad, considering that the bottleneck wasn't our server, but the Atlas Free Tier DB which was able to handle only 60 ops per second.
@@ -65,4 +65,4 @@ Luckily, everything went smoothly from here on. We were continuosly monitoring t
 
 We ended the elections at 3:30 and I felt a sense of accomplishment. Yes, it did not go as planned and Yes, it could have been much better, but I am happy with the fact that we were able to rise up to the occasion, Think calmly and come up with a working solution, all under immense stress. A huge shoutout to the amazing team.
 
-So guys, test that feature out, even if you are very confident it'll work. You never know the 15 minute efforts can save you 15 hours of work later. Something will always go wrong. It always does. Because whatever that can go wrong will go wrong.
+So guys, test that feature out, even if you are very confident it'll work. You never know the 15 minute efforts can save you 15 hours of work later. Something will always go wrong. It always does. Because anything that can go wrong will. 
