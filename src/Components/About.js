@@ -22,7 +22,7 @@ function About() {
             <p>Software Engineer | Full Stack Developer | Cyber Security Enthusiast </p>
 
 
-            <p> Pranav Joglekar is an undergraduate student, pursuing Bachelors in Information Technology at College of Engineering, Pune. Pranav was introduced to the fabulous world of programming at the age of 13 through Scratch and it fascinated him. Since then, for the past 9 years, Pranav has learnt many new languages and technologies and worked on various projects. For him, writing code is like solving a puzzle - You have different pieces(the language syntax) and you need to put these pieces together correctly to solve the problem. And he is a vim guy, in the age of IDE.
+            <p>Pranav is currently working as a software Developer at Avaya, and as the Global DevOps Manager a Bridges For Enterprise. Pranav was introduced to the fabulous world of programming at the age of 13 through Scratch and it fascinated him. Since then, for the past 9 years, Pranav has learnt many new languages and technologies and worked on various projects. For him, writing code is like solving a puzzle - You have different pieces(the language syntax) and you need to put these pieces together correctly to solve the problem. And he is a vim guy, in the age of IDE.
             </p>
 
             <p>
