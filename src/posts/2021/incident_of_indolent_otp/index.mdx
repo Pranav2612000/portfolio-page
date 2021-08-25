@@ -1,7 +1,7 @@
 ---
 id: "incident_of_indolent_otps"
-meta_title: "The Case of Indolent OTPs"
-title: "The Case of Indolent OTPs"
+meta_title: "The Incident of Indolent OTPs"
+title: "The Incident of Indolent OTPs"
 description: "A story about my experience with conducting student body elections at my university, the problem we faced during the elections and how we resolved it"
 keywords: "otp college-elections elections university coep"
 date: 2021-08-22
@@ -10,12 +10,14 @@ desktop_img: ./desktop.png
 alt_img: "a skeleton waiting for OTP to arrive"
 ---
 
-Last month, I had an expererience which strengthened my belief in Murphy's Law - Anything that can go wrong will go wrong.
+Last month, I had an expererience which strengthened my belief in **Murphy's Law - Anything that can go wrong will go wrong.**
 
 I was the lead developer for an election application built by a group of students to elect our university's student heads. It was a very ordinary application - Basic CRUD operations for creating & approving candidates and allowing students to vote for their favourite candidate. Since we humans shun simplicity, an odd requirement of students requiring OTP verification before casting their vote was requested by the university. To complicate matters the voting process was to be kept open for only 30 minutes in which around 4000 students would be casting their votes. And although the university was ready to allot funds for hosting and other services, the procedure for requesting funds and the deadline to have the platform ready made it impossible to get any form of monetary support.
 
 We had a very banal architecture - A Go microservice for connecting with our university's ldap and authenticating users.  
-( We experimened with both NodeJS and Go and found Go to be much faster ), an express backend microservice, a frontend microservice, a database microservice( later shifted to Atlas free tier) and a Nginx loadbalancer for routing. Since we were on a tight budget( or no budget), we couldn't afford an emailing service like SES and had to write a custom emailer which used our private university account for sending the emails.(You see where this is going)
+( *We experimened with both NodeJS and Go and found Go to be much faster* ), an express backend microservice, a frontend microservice, a database microservice(* later shifted to Atlas free tier *) and a Nginx loadbalancer for routing. Since we were on a tight budget( or no budget), we couldn't afford an emailing service like SES and had to write a custom emailer which used our private university account for sending the emails.(*You see where this is going*)
+
+<img class="center w-500" src="https://pranavjoglekarcodes.web.app/posts/indolent_otps/nodemailer.webp" width="50"/>
 
 We had to deploy all these microservices on a single  8 gb machine alloted to us. Worse, the machine was atleast 5 years old running Ubuntu 16. This, along with the fact that my university network is notorius for crashing every year during our Credit Registration made the task seem impossible.
 
@@ -43,11 +45,13 @@ A Video Call to help voters facing problems .... Set up
 
 Finally, I started the countdown at 10 seconds before 1 and ecstatically shouted "We're live guys". The first 10 minutes went without any problems. The number of votes were gradually increasing. Our logs showed people were logging in. There were a couple of students complaining about not receiving the OTP, but my team calmly explained that this may be due to increased load, and asked them to check spam or try again. After around 10 mins, this number started increasing exponentially. Suddenly, someone from my team observed that the number of votes was stuck at 200 and all hell broke lose....
 
-The first indication that something was wrong when I could hear the continuous beeps of new participants joining the meeting we had set up to help voters. There were almost 200 students there, many more in the lobby and all of them were facing the same issue - They werent receiving the OTPs in time.  Eveyone on the team was panicking. And in this confused state the only advice we could give to the students was to retry again, which further exacerbated the problem.
+The first indication that something was wrong when I could hear the continuous beeps of new participants joining the meeting we had set up to help voters. There were almost 200 students there, many more in the lobby and all of them were facing the same issue - They werent receiving the OTPs in time.  Eveyone on the team was panicking. And in this confused state the only advice we could give to the students was to retry again, which further exacerbated the problem. Furthermore, the students were receiving older OTPs, which were being rejected, and another OTP was being sent on rejection, which was also adding to the problems.
 
 Once the initial shock had faded a bit, we got back to work. I spoke with the Faculty In Charge to increase the election time to 2. My co workers were trying to pacify the voters and trying to debug the issue. we predicted that the reason the OTPs werent being sent was because the mail servers werent able to handle our capacity. We came up with a solution of increasing the OTP entering time.
 
 Our best developer at the moment would be doing this change, directly in production, because we had no time. I would be speaking to our data center to see if there was a possibily of them aiding in this matter. The others would be searching the web if there was some other solution. This was the best strategy we could come up with at the moment. I ended the call, promising to join back in 15 minutes with good news.
+
+<img class="center w-500" src="https://pranavjoglekarcodes.web.app/posts/indolent_otps/memes_on_otp.webp" width="50"/>
 
 I sprinted to our data center which is at the other side of the campus(500ms) kicking open the door. Inside was a typical IT guy, arched across a monitor screen, most likely playing solaitaire with a couple of server racks behind him. I approached him and hurriedly started explaining to him the problem.  I had barely started explaining the problem to him when he replied in his typical monotous voice, without even looking up from his screen " I am unable to help. Its in the cloud ". I waited there a minute to see if he had any more insights to offer. When he didnt  flinch his eyes from the computer screen for a whole minute. i knew I was wasting my time and decided to leave.
 
@@ -58,6 +62,8 @@ Suddenly I had an epiphany. I checked the time of the emails I received. They we
 We erupted in a loud shout, happy that atleast the bug had been found and temporarily resolved. I immediately called the Faculty Incharge informing him that the isaue had been fixed and students could start voting again. I requested him to increase the time to 3 and then immediately got back to work after the call. The battle had been won, but we still needed to win the war. We had a 10 minute window before this email exhausted and the OTPs stopped again.
 
 We would've needed atleast 6 other emails to make the OTP service run till the end of elections. I frantically reached out to everyone involved with the project asking them to share their university account credentials. In the meanwhile we decided to write a simple script which randomly picked an account for sending the email, in order to distribute the load, again, directly in production. I know its risky, but that's what makes it fun.
+
+<img class="center w-500" src="https://pranavjoglekarcodes.web.app/posts/indolent_otps/changes_in_prod.webp" width="50"/>
 
 During this time, the number of votes was gradually increasing which was reassuring because it denoted that our fix was working. Once we had multiple credentials and the script in place we did the required changes to our code and redeployed the server. It was around 2:15 then.
 
