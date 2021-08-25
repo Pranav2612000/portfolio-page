@@ -19,43 +19,58 @@ const Life  = (props) => {
           <VerticalTimeline className={mode_class}>
             <VerticalTimelineElement
               className={"vertical-timeline-element--work " + mode_class}
-              date="2015 - 2017"
-              iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-            >
-              <h3 className="vertical-timeline-element-title">Modern College of Science, Arts & Commerce</h3>
-              <h4 className="vertical-timeline-element-subtitle">Pune, India</h4>
-              <p>
-                Higher Secondary Education
-              </p>
-            </VerticalTimelineElement>
-            <VerticalTimelineElement
-              className={"vertical-timeline-element--work " + mode_class}
-              date="2017 - 2021"
-              iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-            >
-              <h3 className="vertical-timeline-element-title">College of Engineering Pune</h3>
-              <h4 className="vertical-timeline-element-subtitle">Pune, India</h4>
-              <p>
-                Bachelors in Information Technology
-              </p>
-            </VerticalTimelineElement>
-            <VerticalTimelineElement
-              className={"vertical-timeline-element--work " + mode_class}
-              date="May 2020 - June 2020"
+              date="Dec 2020 - Present"
               iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
             >
-              <h3 className="vertical-timeline-element-title">Glossaread Frontend Intern</h3>
-              <h4 className="vertical-timeline-element-subtitle">Remote</h4>
+              <h3 className="vertical-timeline-element-title">Founding Engineer - Stamp My Visa</h3>
+              <h4 className="vertical-timeline-element-subtitle">Pune, India</h4>
               <p>
-                Interacted with design team to convert design to React pages
+                Lead the frontend team in developing a responsive, user centric website with animations and transitions
               </p>
               <p>
-                Used Tools like AdobeXD, Zeplin, Figma for working with designs.
+                Write APIs to be consumed by the frontend
+              </p>
+              <p>
+                Build the architecture and database designs
               </p>
             </VerticalTimelineElement>
             <VerticalTimelineElement
               className={"vertical-timeline-element--work " + mode_class}
-              date="Feb 2020 - Present"
+              date="June 2021 - Present"
+              iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
+            >
+              <h3 className="vertical-timeline-element-title">Global DevOps Manager - Bridges for Enterprise</h3>
+              <h4 className="vertical-timeline-element-subtitle">Remote</h4>
+              <p>
+                oversee BfE’s cloud infrastructure covering areas from setup, management to budgeting
+              </p>
+              <p>
+                manage and troubleshoot internal DevOps deployment pipelines and local development setup
+              </p>
+              <p>
+                maintain a vision of our tech toolchain and infrastructure needs according to the projected scale of our operation and our financial capabilities
+              </p>
+            </VerticalTimelineElement>
+            <VerticalTimelineElement
+              className={"vertical-timeline-element--work " + mode_class}
+              date="2017 - Present"
+              iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
+            >
+              <h3 className="vertical-timeline-element-title">Technical Lead - Software Development Section</h3>
+              <h4 className="vertical-timeline-element-subtitle">Pune, India</h4>
+              <p>
+                Communicate with project stakeholders to extract requirements,design a system to fulfill these requirements and convert these requirements to code
+              </p>
+              <p>
+               Consistently review code from various projects(5+)
+              </p>
+              <p>
+              Motivate, guide and assist juniors, solve their technical difficulties and teach concepts like versioncontrol, SDLC, cleancode.
+              </p>
+            </VerticalTimelineElement>
+            <VerticalTimelineElement
+              className={"vertical-timeline-element--work " + mode_class}
+              date="Feb 2020 - Dec 2020"
               iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
             >
               <h3 className="vertical-timeline-element-title">Nanostuffs - Intern</h3>
@@ -83,19 +98,27 @@ const Life  = (props) => {
             </VerticalTimelineElement>
             <VerticalTimelineElement
               className={"vertical-timeline-element--work " + mode_class}
-              date="2017 - Present"
+              date="May 2020 - June 2020"
               iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
             >
-              <h3 className="vertical-timeline-element-title">Technical Lead - Software Development Section</h3>
+              <h3 className="vertical-timeline-element-title">Glossaread Frontend Intern</h3>
+              <h4 className="vertical-timeline-element-subtitle">Remote</h4>
+              <p>
+                Interacted with design team to convert design to React pages
+              </p>
+              <p>
+                Used Tools like AdobeXD, Zeplin, Figma for working with designs.
+              </p>
+            </VerticalTimelineElement>
+            <VerticalTimelineElement
+              className={"vertical-timeline-element--work " + mode_class}
+              date="2017 - 2021"
+              iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+            >
+              <h3 className="vertical-timeline-element-title">College of Engineering Pune</h3>
               <h4 className="vertical-timeline-element-subtitle">Pune, India</h4>
               <p>
-                Communicate with project stakeholders to extract requirements,design a system to fulfill these requirements and convert these requirements to code
-              </p>
-              <p>
-               Consistently review code from various projects(5+)
-              </p>
-              <p>
-              Motivate, guide and assist juniors, solve their technical difficulties and teach concepts like versioncontrol, SDLC, cleancode.
+                Bachelors in Information Technology
               </p>
             </VerticalTimelineElement>
           </VerticalTimeline>
