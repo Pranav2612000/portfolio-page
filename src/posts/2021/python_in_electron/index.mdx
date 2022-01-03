@@ -1,0 +1,180 @@
+---
+id: "pythonInElectron"
+meta_title: "Package and run Python code in Electron App"
+title: "Package and run python in Electron App (Without packaging python in the build)"
+description: "Learn how to use python with an electron application and build it on a machine without python installed."
+keywords: "electron python pyInstaller execute run"
+date: 2021-10-10
+published: true
+desktop_img: ./desktop.png
+alt_img: "A box labelled and looking like electron having python inside it"
+---
+
+_Lately, I have been working on an electron application - one requiring the arcane features of electron to be used. I have found that although the electron documentation provides information about the APIs, it lacks in providing enough examples to grasp the concepts. I've wasted countless hours trying to understand the APIs, with no results. Most of the answers I've found are not from the official documents, neither from external blogs, but from github issues, which frankly is not a great developer experience. Other times, I've had to try a trial and error method hoping it would work which is also a demotivating and cumbersome process. So most of my upcoming posts are going to be based on the framework in the hope that these posts help other developers, atleast with the problems that I faced._
+
+## Introduction
+
+In this blog, I'll be discussing about how you can package python code with your electron application. Although this seems a little "extra" and weird, it has various use cases. The most common one is to use electron as a presentation layer and Python as the logic ( The Web is the most well documented and supported GUI Standard. Other Python libraries aren't even close). For me, the reason was that I wanted to use a python package in our electron app, and it was not only unaffordable to write the whole package, but it also had to be run on the users machine.
+
+Now, you may say it's a common problem and yes, a quick google search will show you a lot of ways to do it. I went through all these solutions but all they assume that you have python already installed and running on the clients machine, which I think is a very far fetched assumption. Incidently, the most common library suggested - [python-shell](https://www.npmjs.com/package/python-shell) assumes you have python installed on the system.
+
+In this tutorial, I'll be explaining how to build your application in such a way that you don't need python explicitly installed on the user's machine. For completeness, I'll be starting from the start, but if you just want to know how the application is to be packaged, you can skip to the packaging and executing section.
+
+## Creating the Python Server
+
+Let's say you have a simple function `add` which you want to trigger through electron, and get the sum back.
+
+```python
+def add(a, b):
+    return a + b
+```
+
+Now there are multiple ways of doing this. You can create a python script and trigger it through python-shell, but the one I found the most customizable is to wrap the function in a simple flask server and make plain ol' REST APIs for communication. Let's see how it's done
+
+Here's a simple flask server which adds to numbers and returns the sum back. The `add` function can be replaced by any function you want.
+
+```python
+from flask import Flask, request
+app = Flask(__name__)
+
+def add(a, b):
+    return a + b
+
+
+@app.route('/add', methods=["POST"])
+def add_handler():
+    request_data = request.get_json()
+    a = request_data["a"]
+    b = request_data["b"]
+
+    response = { "sum" : add(a, b) }
+    return response
+
+
+if __name__ == '__main__':
+    app.run(debug = False, host="0.0.0.0", port="3000")
+```
+
+Once we have this flask server set up. We use Postman or Insomnia to test the server once and ensure it works the way we want. Once we are sure it's working as expected, we can move on to the next step.
+
+## Starting the server from Electron
+
+Now that we have the server ready. The next step is to start it from our electron application. The way to do it is using the [spawn](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options) function in node.
+
+Here's a snippet which starts the server. This can be used at a place you feel suitable. For me, I am starting this server in the entrypoint of the application - the main.js process.
+
+```javascript
+const { spawn } = require("child_process");
+
+let pythonServer = spawn('python',["./index.py"] );
+```
+
+Replace `./index.py` by the path of your python file
+
+Similarly, since we are using the clients extra resources to run the flask server, it's a good practice to terminate the server once our application closes. The way to do it is -
+
+```javascript
+    pythonServer.stdin.write('\x03'); // sends the Ctrl-C keystroke
+    
+    /* You can also use the following commands to stop the server
+    translationServer.kill();
+    kill(translationServer.pid, "SIGKILL"); // requires tree-kill package
+    */
+```
+
+Here, the pythonServer variable contains the value returned after calling the spawn function above.
+
+This snippet to close the server should be called when the user closes the application. For me, I am calling this here -
+
+```javascript
+const { app } = require("electron");
+
+app.on("window-all-closed", function () {
+  try {
+    pythonServer.stdin.write('\x03')
+  } catch(err) {
+    console.log(err);
+  }
+  app.quit();
+});
+```
+
+Once these changes are done, let's test if the server starts and stops correctly. Run the electron application and use Insomnia to hit the API - you should find the application running. Then, close the application and call the API again, it should say that the flask server is down.
+
+## Calling the API through Electron
+
+This should be a very simple step for experienced JS developers. We'll be making a simple API call through JS. You can use the method you want, but I prefer fetch. The code looks like
+
+```javascript
+      let endpoint = "http://localhost:3000/add";
+      try {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          body: JSON.stringify({
+              a: 1,
+              b: 2
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+        let parsedResp = await res.json();
+        return parsedResp.sum;
+      } catch(err) {
+        console.log(err);
+      }
+```
+
+You get the response back and you can use it for the purpose you want.
+
+We're almost done now. We are able to run python scripts through electron. The only part pending is to package it so that it works in production builds without python.
+
+## Packaging and Executing the Python Script
+
+Since we want to be able to run the python flask server without needing python installed on the system, we'll need to package python and other dependencies into an application. There are various tools to do this. I used [pyInstaller](https://pypi.org/project/pyinstaller/) since I found it to be simple to get started.
+
+To install pyInstaller, run
+
+```bash
+pip install pyinstaller
+```
+
+To generate an executable, you need to run
+
+```bash
+pyinstaller index.py
+```
+
+pyInstaller will compile all the dependencies and provide you with an executable at `dist/index/index`
+
+Run the executable once and test if the server works as expected.
+
+**Note: pyInstaller is not a cross-compiler, which means that if you want to run the server on windows, you'll need to bulid it on a windows machine.**
+
+Now that we have the executable file ready, we'll replace the spawn command to run this executable directly. Your modified code should look like this -
+
+```js
+const { spawn } = require("child_process");
+
+let pythonServer = spawn("./dist/index/index"] );
+```
+
+Run the electron application again and ensure everything works as expected.
+
+## Building the Production Application
+
+This step may differ depending on the electron build tool you use. I've used [electron-builder](https://www.electron.build/) which is an awesome tool. If you don't have a preference, I suggest you use this tool.
+
+Assuming you already have an electron-builder configuration ready (Go [here](https://www.electron.build/configuration/configuration.html) if you don't), you just need to add the packaged python executable into the electron build. The way to do it is to add the location of the dist/ folder ( generated by pyInstaller ) to the extraResources(link) section of the configuration. Here's how it looked for me -
+
+```json
+    "extraResources": [
+      "./dist/**"
+    ],
+```
+
+And that's it. You're done. Package the Electron application once and verify everything works as expected. Feel free to reach out if you need help. Also, I am still learning electron and am open to suggestions/changes or to discuss how this could have been done better.
+
+## Some more Tips
+
+1. Ensure the flask server has debug=True, otherwise it will start a hot-reloading server which doesn't stop through electron
+  
+2. Show a proper warning if the port you are using for the flask application is already being used by the client for something other task.
