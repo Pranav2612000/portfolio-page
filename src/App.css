@@ -911,6 +911,10 @@ footer a:hover, .top-sign a:hover {
   cursor: pointer;
 }
 
+.padding-top-70px {
+  padding-top: 70px;
+}
+
 /* SMALL SCREEN */
 @media only screen and (max-width: 769px) {
   .section-wrapper {
