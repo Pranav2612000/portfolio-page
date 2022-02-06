@@ -1,0 +1,112 @@
+---
+id: "binarySearchInArray"
+meta_title: "Binary Search in an array of objects"
+title: "Binary Searching in an array of objects - JS"
+description: "A small snippet to allow you to binary search an array of objects based on a custom function"
+keywords: "binary search array objects javascript"
+date: 2022-02-06
+published: true
+desktop_img: ./desktop.png
+alt_img: "A joke about binary trees"
+---
+
+This short blog is going to explain a solution to a very simple use case
+
+You have an array of objects. The array is sorted based on a certain property of the object. You now need to find a particular element in this array.
+
+TLDR; Scroll to the end to find the function which allows you binary search in an array based on a custom function
+
+So say, for example, you have an array of people object. The people object contains the properties firstName, lastName, age, occupation. This array is sorted based on firstName, lastName, occupation, age in this order.
+
+```javascript
+const people = [
+    {
+        firstName: 'Leanna',
+        lastName: 'Kent',
+        occupation: 'activist',
+        age: 24
+    },
+    {
+        firstName: 'Zayan',
+        lastName: 'Goodman',
+        occupation: 'cook',
+        age: 30
+    },
+    {
+        firstName: 'Leana',
+        lastName: 'Malone',
+        occupation: 'programmer',
+        age: 18
+    },
+    {
+        firstName: 'Piper',
+        lastName: 'Gallagher',
+        occupation: 'businessman',
+        age: 35
+    }
+]
+```
+
+Now from this array, your task is to find `Leana Malone` who is a programmer.
+
+Again, operations like this are fairly common and the simplest way to do this is to just go through all the elements of the array until we find the right element. (`Array.find`)This is a `O(n)`operation and while this may work for small arrays, it becomes unscalable as the number of elements in the array start to increase. So, we need a better way.
+
+The first step in solving problems from first principles is to use all the information we have. Here, we have the extra information that the array is sorted based on an order. We can exploit this fact to perform the search in `O(log n)` by using a basic Binary Search Algorithm.
+
+Okay, I get it.... Enough with the words. Here's the code
+
+```javascript
+export default function binarySearchInArray(arr, compareFunc) {
+    let start = 0;
+    let end = arr.length - 1;
+
+    while (start <= end) {
+        let middle = Math.floor((start + end) / 2);
+
+        let result = compareFunc(arr[middle]);
+        // NOTE the ".email" part added
+        if (result === 0) {
+            return arr[middle];
+        } else if (result < 0) {
+            start = middle + 1;
+        } else {
+            end = middle - 1;
+        }
+    }
+    return -1;
+};
+```
+
+As you see, this function takes two parameters, one is the array to be searched for, and the second is a function which it uses to search in the array. As expected, the compareFunc function should return `0`if the right element is found, -1 if a smaller element is found and +1 if a larger element is found. ( Here's another way for understanding this, we return -1 if we want to move the search to the right of the current element, and +1 if we want to search to the left of the current element). The binarySearchInArr function then returns the index of the element which matches the required condition.
+
+So for the array above, the way we would use this is
+
+```javascript
+const findLeana = (currentObject) => {
+    if (currentObject.firstName === 'Leana' &&
+         currentObject.lastName === 'Malone') {
+        return 0;
+    }
+    if (currentObject.firstName > 'Leana') {
+        return 1;
+    } else if (currentObject.firstName < 'Leana') {
+        return -1;
+    } else {
+       /* case when the firstNames are equal, so we compare lastnames */
+       if(currentObject.lastName > 'Malone')
+            return 1;
+       else
+            return -1;
+    }
+}
+
+const indexOfLeana = binarySearchInArr(people, findLeana);
+```
+
+This should give us the index at which the required object is present, which we can then use to access the object.
+
+That's it. Feel free to use this function wherever you see fit. You can use this link as well to copy it https://github.com/Pranav2612000/utils/blob/master/javascript/helpers/binarySearchInSortedArray.js
+
+I know this may not be the best or most readable method and I am open to discussing this. Feel free to drop me a message/email.
+
+This answer has been inspired by this[[javascript - Can I do a binary search on an array of objects? - Stack Overflow](https://stackoverflow.com/questions/66820529/can-i-do-a-binary-search-on-an-array-of-objects)] stackoverflow answer
