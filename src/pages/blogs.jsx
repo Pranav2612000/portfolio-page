@@ -3,6 +3,7 @@ import Layout from '../Components/Layout.jsx';
 import Helmet from 'react-helmet'
 import Blogs from '../Components/Blogs';
 import { graphql } from 'gatsby'
+import '../styles/postPageTemplate.css';
 
 export const query = graphql
 `
