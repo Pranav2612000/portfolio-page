@@ -7,7 +7,7 @@ const PrivacyPolicy = () => {
     <>
       <Layout>
         {(mode) => (
-          <>
+          <main className='privacy-policy'>
             <h1>Privacy Policy</h1>
             <p>Last updated: March 05, 2023</p>
 
@@ -156,7 +156,7 @@ const PrivacyPolicy = () => {
             <p>If you have any questions about this Privacy Policy, You can contact us:</p>
 
             <p>By email: pranav2000joglekar@gmail.com</p>
-          </>
+          </main>
         )}
       </Layout>
       <Helmet>
