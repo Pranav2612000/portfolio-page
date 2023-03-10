@@ -42,7 +42,6 @@ module.exports = {
         },
         serialize: ({path}) => {
           const lastmodDate = new Date().toISOString().split('T')[0];
-          console.log("date",lastmodDate);
           return {
             url: path,
             changefreq: 'daily',
