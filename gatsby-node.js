@@ -23,7 +23,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   }
 }
 
-exports.modifyWebpackConfig = ({ config, stage }) => {
+exports.onCreateWebpackConfig = ({ config, stage }) => {
   config.merge({
     resolve: {
       alias: {
