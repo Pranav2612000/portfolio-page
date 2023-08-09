@@ -72,6 +72,18 @@ class Layout extends React.Component {
 
                 <meta property="og:site_name" content="Pranav Joglekar | Portfolio"/>
                 <meta name="twitter:image:alt" content="Pranav Joglekar"/>
+
+                {/* Script for Google Analytics */}
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T9TBP554C"></script>
+                <script>
+                  {`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+
+                    gtag('config', 'G-8T9TBP554C');
+                  `}
+                </script>
             </Helmet>
             <Nav mode={this.state.mode} handleMode={this.handleMode} />
             <Hamburger mode={this.state.mode} />

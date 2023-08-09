@@ -3,13 +3,15 @@ module.exports = {
     siteUrl: `https://pranavjoglekarcodes.web.app`,
   },
   plugins: [
+    /*
     {
       resolve: "gatsby-plugin-google-tagmanager-delayed",
       options: {
-        id: "GTM-KHW3X7J",
-        includeInDevelopment: false,
+        id: "G-8T9TBP554C",
+        includeInDevelopment: true,
       },
     },
+    */
     {
       resolve: "gatsby-plugin-sitemap",
       options: {
