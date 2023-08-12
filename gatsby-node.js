@@ -23,7 +23,9 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   }
 }
 
-exports.onCreateWebpackConfig = ({ config, stage }) => {
+exports.onCreateWebpackConfig = ({ getConfig, stage, actions, loaders }) => {
+  let config = getConfig();
+  /*
   config.merge({
     resolve: {
       alias: {
@@ -31,12 +33,22 @@ exports.onCreateWebpackConfig = ({ config, stage }) => {
       },
     },
   })
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        'react-devicon': path.resolve(__dirname, '../src/components'),
+      },
+    },
+  });
+  */
 
   if (
     ['develop', 'develop-html', 'build-html', 'build-javascript'].includes(
       stage
     )
   ) {
+    
+    /*
     // Remove svg from url-loader config
     config.loader(`url-loader`, {
       test: /\.(jpg|jpeg|png|gif|mp4|webm|wav|mp3|m4a|aac|oga)(\?.*)?$/,
@@ -50,7 +62,23 @@ exports.onCreateWebpackConfig = ({ config, stage }) => {
       test: /\.svg$/,
       loader: 'raw-loader',
     })
+    */
+   config.module.rules = [
+    ...config.module.rules.filter(
+      rule => !(String(rule.test).includes("svg"))
+    ),
+    {
+      test: /\.(ico|jpg|jpeg|png|gif|mp4|webm|wav|mp3|m4a|aac|oga)(\?.*)?$/,
+      ...loaders.url()
+    },
+    {
+      test: /\.svg$/,
+      ...loaders.raw()
+    }
+   ]
   }
+
+  actions.replaceWebpackConfig(config)
   return config
 }
 

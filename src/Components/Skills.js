@@ -1,13 +1,5 @@
 import React from 'react';
-import IconC from 'react-devicon/c/original';
-import DevIcon from "devicon-react-svg";
-import SVGInline from "react-svg-inline"
 import nextJSImg from "../assets/next-js-seeklogo.com.svg";
-
-const devIconStyle = {
-  fill: "thistle",
-  width: "150px"
-};
 
 function Skills() {
   return (
