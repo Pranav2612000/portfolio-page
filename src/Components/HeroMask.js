@@ -59,7 +59,7 @@ function HeroMask(props) {
         <a href="/#about">
           <div className={props.mode ? "hero-title hero-title-dark" : "hero-title"}>
             <h1>Pranav Joglekar</h1>
-            <h2>Full Stack Developer</h2>
+            <h2>Problem Solver</h2>
           <div className="code-box">
             <pre>
               <code>
@@ -69,27 +69,30 @@ function HeroMask(props) {
               </code>
 
               <code>
-                &emsp;<span className="property">forte</span>
+                &emsp;<span className="property">status</span>
                 <span className="colon">:</span>{" "}
-                <span className="string">"Full Stack Web Development & System Design"</span>,
+                <span className="string">"Building 🛠️"</span>,
+              </code>
+              <code>
+                &emsp;<span className="property">looking_for_work</span>
+                <span className="colon">:</span>{" "}
+                <span className="string">true</span>,
               </code>
               <code>
                 &emsp;<span className="property">interests</span>
                 <span className="colon">:</span> [
               </code>
               <code>
-                &emsp;&emsp;<span className="string">"building user centric products from scratch"</span>,
+                &emsp;&emsp;<span className="string">"rust"</span>,
               </code>
               <code>
-                &emsp;&emsp;<span className="string">"learning new technologies, frameworks & languages"</span>,
+                &emsp;&emsp;<span className="string">"reading"</span>,
+              </code>
+              <code>
+                &emsp;&emsp;<span className="string">"running"</span>,
               </code>
               <code>&emsp;],</code>
-              <code>
-                &emsp;<span className="property">_id</span>
-                <span className="colon">:</span>{" "}
-                <span className="string">"writing clean and secure code"</span>,
-              </code>
-              <code>{"}"}</code>
+              <code>{"};"}</code>
             </pre>
           </div>
           </div>
