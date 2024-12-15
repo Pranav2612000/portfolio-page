@@ -7,6 +7,246 @@ const renderTopProjects = () => {
         <section className="single-project">
           <section className="single-project-left">
             <div className="project-image">
+              <a href="https://www.helmer.app/" target="_blank" rel="noopener noreferrer">
+                <StaticImage
+                  aspectRatio={1 / 1}
+                  alt="Helmer"
+                  src="../assets/project-helmer.png"
+                  formats={["auto", "png", "avif"]}
+                  className="large"
+                />
+              </a>
+            </div>
+          </section>
+
+          <section className="single-project-right">
+            <div className="project-title">
+              <h4>
+                <a href="https://www.helmer.app/" target="_blank" rel="noopener noreferrer">Helmer</a>
+              </h4>
+            </div>
+
+            <div className="project-description">
+              <p>
+              A new way to record screencasts - Capture audio, video, camera, keystrokes & everything else, merging it together to create videos.
+              Everything works locally and you can also use AI to help you out and speed up the process.
+              </p>
+
+              <p>Technologies:</p>
+              <ul>
+                <li>Rust</li>
+                <li>Tauri</li>
+                <li>Astro</li>
+                <li>Video & Audio Processing</li>
+                <li>ffmpeg</li>
+              </ul>
+
+              <div className="project-links">
+                  <a href="https://github.com/helmerapp" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M22 6v16h-20v-16h20zm2-6h-24v24h24v-24zm-11 11v1.649l3.229 1.351-3.229 1.347v1.653l5-2.201v-1.599l-5-2.2zm-7 2.201v1.599l5 2.2v-1.653l-3.229-1.347 3.229-1.351v-1.649l-5 2.201z"/></svg> 
+                    Demo / Live version
+                  </a>
+              </div>
+
+            </div>
+          </section>
+        </section>
+
+        <section className="single-project">
+          <section className="single-project-left">
+            <div className="project-image">
+              <a href="https://pranav2612000.github.io/raft/" target="_blank" rel="noopener noreferrer">
+                <StaticImage
+                  alt="Raft simulator"
+                  src="../assets/project-raft.png"
+                  formats={["auto", "png", "avif"]}
+                  className="large"
+                />
+              </a>
+            </div>
+          </section>
+
+          <section className="single-project-right">
+            <div className="project-title">
+              <h4>
+                <a href="https://pranav2612000.github.io/raft/" target="_blank" rel="noopener noreferrer">Raft Simulator</a>
+              </h4>
+            </div>
+
+            <div className="project-description">
+              <p>
+                A browser simulation of the raft protocol, useful for understanding how it works.
+              </p>
+              <p>
+                Implementation based on the <a href="https://raft.github.io/raft.pdf">Raft whitepaper</a>
+              </p>
+
+              <p>Technologies:</p>
+              <ul>
+                <li>Raft</li>
+                <li>Distributed Systems</li>
+                <li>HTML Canvas</li>
+              </ul>
+
+              <div className="project-links">
+                  <a href="https://github.com/Pranav2612000/raft" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M22 6v16h-20v-16h20zm2-6h-24v24h24v-24zm-11 11v1.649l3.229 1.351-3.229 1.347v1.653l5-2.201v-1.599l-5-2.2zm-7 2.201v1.599l5 2.2v-1.653l-3.229-1.347 3.229-1.351v-1.649l-5 2.201z"/></svg> 
+                    Demo / Live version
+                  </a>
+              </div>
+
+            </div>
+          </section>
+        </section>
+
+
+        <section className="single-project">
+          <section className="single-project-left">
+            <div className="project-image">
+              <a href="https://crates.io/crates/scap" target="_blank" rel="noopener noreferrer">
+                <StaticImage
+                  aspectRatio={4 / 1}
+                  alt="scap - screen recorder"
+                  src="../assets/project-scap.gif"
+                  formats={["auto", "gif", "avif"]}
+                  className="large"
+                />
+              </a>
+            </div>
+          </section>
+
+          <section className="single-project-right">
+            <div className="project-title">
+              <h4>
+                <a href="https://crates.io/crates/scap" target="_blank" rel="noopener noreferrer">scap - modern screencapture engine</a>
+              </h4>
+            </div>
+
+            <div className="project-description">
+              <p>
+                High-performance, cross-platform screen capture library in Rust.
+              </p>
+              <p>Acquired by <a href='https://cap.so/'>Cap</a></p>
+
+              <p>Technologies:</p>
+              <ul>
+                <li>Rust</li>
+                <li>Cargo</li>
+                <li>Video processing</li>
+                <li>ffmpeg</li>
+              </ul>
+
+              <div className="project-links">
+                  <a href="https://github.com/CapSoftware/scap" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M22 6v16h-20v-16h20zm2-6h-24v24h24v-24zm-11 11v1.649l3.229 1.351-3.229 1.347v1.653l5-2.201v-1.599l-5-2.2zm-7 2.201v1.599l5 2.2v-1.653l-3.229-1.347 3.229-1.351v-1.649l-5 2.201z"/></svg> 
+                    Demo / Live version
+                  </a>
+              </div>
+
+            </div>
+          </section>
+        </section>
+
+        <section className="single-project">
+          <section className="single-project-left">
+            <div className="project-image">
+              <a href="https://quick-wifi-share.web.app/" target="_blank" rel="noopener noreferrer">
+                <StaticImage
+                  alt="wifi-share"
+                  src="../assets/project-wifishare.png"
+                  formats={["auto", "png", "avif"]}
+                  className="large"
+                />
+              </a>
+            </div>
+          </section>
+
+          <section className="single-project-right">
+            <div className="project-title">
+              <h4>
+                <a href="https://chromewebstore.google.com/detail/Wifi%20Share/kdjhpollblakokcnfhbgmallkelgncbn?hl=en" target="_blank" rel="noopener noreferrer">wifi share</a>
+              </h4>
+            </div>
+
+            <div className="project-description">
+              <p>
+                A <a href="https://chromewebstore.google.com/detail/Wifi%20Share/kdjhpollblakokcnfhbgmallkelgncbn?hl=en">browser extension</a> and a <a href="https://quick-wifi-share.web.app/">web app</a> to allow you to share a scratchpad over the network.
+              </p>
+
+              <p>Technologies:</p>
+              <ul>
+                <li>Browser Extension</li>
+                <li>Socket Programming</li>
+                <li>Figma</li>
+              </ul>
+
+              <div className="project-links">
+                  <a href="https://github.com/Pranav2612000/wifi_share" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M22 6v16h-20v-16h20zm2-6h-24v24h24v-24zm-11 11v1.649l3.229 1.351-3.229 1.347v1.653l5-2.201v-1.599l-5-2.2zm-7 2.201v1.599l5 2.2v-1.653l-3.229-1.347 3.229-1.351v-1.649l-5 2.201z"/></svg> 
+                    Demo / Live version
+                  </a>
+              </div>
+
+            </div>
+          </section>
+        </section>
+
+        <section className="single-project">
+          <section className="single-project-left">
+            <div className="project-image">
+              <a href="https://github.com/apps/sdk-integrator-007" target="_blank" rel="noopener noreferrer">
+                <StaticImage
+                  width="200px"
+                  aspectRatio={1 / 1}
+                  alt="integrator - sdk integration bot"
+                  src="../assets/project-ai.webp"
+                  formats={["auto", "gif", "avif"]}
+                  className="large"
+                />
+              </a>
+            </div>
+          </section>
+
+          <section className="single-project-right">
+            <div className="project-title">
+              <h4>
+                <a href="https://github.com/apps/sdk-integrator-007" target="_blank" rel="noopener noreferrer">SDK Integrator</a>
+              </h4>
+            </div>
+
+            <div className="project-description">
+              <p>
+                A GitHub App built with Probot that integrate SDKs with your project
+              </p>
+
+              <p>Technologies:</p>
+              <ul>
+                <li>AI Agents</li>
+                <li>RAG</li>
+                <li>AI Programming</li>
+                <li>LLMs</li>
+              </ul>
+
+              <div className="project-links">
+                  <a href="https://github.com/apps/sdk-integrator-007" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M22 6v16h-20v-16h20zm2-6h-24v24h24v-24zm-11 11v1.649l3.229 1.351-3.229 1.347v1.653l5-2.201v-1.599l-5-2.2zm-7 2.201v1.599l5 2.2v-1.653l-3.229-1.347 3.229-1.351v-1.649l-5 2.201z"/></svg> 
+                    Demo / Live version
+                  </a>
+              </div>
+
+            </div>
+          </section>
+        </section>
+    </>
+  );
+};
+
+const renderOtherProjects = () => {
+  return (
+      <>
+        <section className="single-project">
+          <section className="single-project-left">
+            <div className="project-image">
               <a href="https://milaap.video/" target="_blank" rel="noopener noreferrer">
                 <StaticImage
                   aspectRatio={2 / 1}
@@ -64,7 +304,7 @@ const renderTopProjects = () => {
         <section className="single-project">
           <section className="single-project-left">
             <div className="project-image">
-              <a href="https://stormy-woodland-33610.herokuapp.com/login/" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/Pranav2612000/colab_tool" target="_blank" rel="noopener noreferrer">
                 <StaticImage
                   aspectRatio={2 / 1}
                   alt="togthrdo note taking in progress"
@@ -80,7 +320,7 @@ const renderTopProjects = () => {
           <section className="single-project-right">
             <div className="project-title">
               <h4>
-                <a href="https://stormy-woodland-33610.herokuapp.com/login/" target="_blank" rel="noopener noreferrer">togthrdo - A radical note-taking application</a>
+                <a href="https://github.com/Pranav2612000/colab_tool" target="_blank" rel="noopener noreferrer">togthrdo - A radical note-taking application</a>
               </h4>
             </div>
 
@@ -102,26 +342,15 @@ const renderTopProjects = () => {
               </ul>
 
               <div className="project-links">
-                  <a href="https://stormy-woodland-33610.herokuapp.com/login/" target="_blank" rel="noopener noreferrer">
+                  <a href="https://github.com/Pranav2612000/colab_tool" target="_blank" rel="noopener noreferrer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M22 6v16h-20v-16h20zm2-6h-24v24h24v-24zm-11 11v1.649l3.229 1.351-3.229 1.347v1.653l5-2.201v-1.599l-5-2.2zm-7 2.201v1.599l5 2.2v-1.653l-3.229-1.347 3.229-1.351v-1.649l-5 2.201z"/></svg> 
                     Demo / Live version
-                  </a>
-                <a href="https://github.com/Pranav2612000/colab_tool" target="_blank" rel="noopener noreferrer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"> <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
-                    View repo on Github
                   </a>
               </div>
 
             </div>
           </section>
         </section>
-    </>
-  );
-};
-
-const renderOtherProjects = () => {
-  return (
-      <>
         <section className="single-project">
           <section className="single-project-left">
             <div className="project-image">
