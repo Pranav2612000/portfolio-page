@@ -18,7 +18,7 @@ const IndexPage = () => {
             <Hero mode={mode}/>
             <About />
             <Skills />
-            <Projects />
+            {/*<Projects /> */}
             <Resume />
             <Contact />
           </>
