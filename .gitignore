@@ -3,6 +3,9 @@ build/
 public/
 .cache/
 
+# Netlify files
+functions-build/
+
 
 # Logs
 logs
