@@ -27,6 +27,7 @@ function Nav(props) {
         <Link href="/projects" className="nav-item"><li>Projects</li></Link>
         <Link href="/experience" className="nav-item"><li>Experience</li></Link>
         <a href="/#resume" className="nav-item"><li>Resume</li></a>
+        <Link href="/papershelf" className="nav-item"><li>Papershelf</li></Link>
         <a href="/#contact" className="nav-item"><li>Contact Me</li></a>
       </ul>
 
