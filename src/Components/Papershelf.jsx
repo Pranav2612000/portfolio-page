@@ -29,6 +29,9 @@ const Papershelf = () => {
     <div id="papershelf" className="section-wrapper">
       <div>
         <h1 className="section-title">Papershelf</h1>
+        <section>
+          A list of research papers, articles & blogs I've enjoyed reading
+        </section>
         <section className="papershelf-papers">
           <ul>
             {papers.map((paper, index) => {
