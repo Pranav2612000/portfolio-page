@@ -20,7 +20,7 @@ const Blogs = (props) => {
   const [blogs, setBlogs] = useState([]);
   useEffect(() => {
       const getBlogs = async () => {
-        const res = await fetch("https://elegant-morse-8c8a2f.netlify.app/.netlify/functions/server/getBlogs", {
+        const res = await fetch("https://pranav-portfolio-api.netlify.app/.netlify/functions/server/getBlogs", {
             mode: 'cors',
             headers: {
                 "Content-Type": "application/json"
