@@ -52,14 +52,14 @@
       {%- for link in links %}
       <a href="{{ link[1] }}"{% if page.url == link[1] or (link[1] == "/blogs/" and page.url and page.url.startsWith("/blogs/")) %} aria-current="page"{% endif %}>{{ link[0] }}</a>
       {%- endfor %}
-      <button
-        class="theme-toggle"
-        x-data="{ dark: document.documentElement.dataset.theme === 'dark' }"
-        @click="dark = !dark; document.documentElement.dataset.theme = dark ? 'dark' : 'light'; try { localStorage.setItem('theme', document.documentElement.dataset.theme) } catch (e) {}"
-        x-text="dark ? 'Light' : 'Dark'"
-        aria-label="Switch light or dark mode"
-      >Dark</button>
     </nav>
+    <button
+      class="theme-toggle"
+      x-data="{ dark: document.documentElement.dataset.theme === 'dark' }"
+      @click="dark = !dark; document.documentElement.dataset.theme = dark ? 'dark' : 'light'; try { localStorage.setItem('theme', document.documentElement.dataset.theme) } catch (e) {}"
+      x-text="dark ? 'Light' : 'Dark'"
+      aria-label="Switch light or dark mode"
+    >Dark</button>
   </header>
 
   <main class="page">

@@ -97,7 +97,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--link); outline-
   font-size: .85rem;
 }
 .site-name { color: var(--title-color); font-family: var(--hand-font); font-size: 1.5rem; font-weight: 700; line-height: 1; text-decoration: none; }
+.site-header { align-items: center; }
+.site-header .site-name { margin-right: auto; }
 .site-header nav { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem 1rem; }
+/* Small screens: Dark/Light sits top right next to the name, menu on its own line below */
+@media (max-width: 640px) {
+  .site-header .theme-toggle { order: 2; }
+  .site-header nav { order: 3; flex-basis: 100%; }
+}
 .site-header nav a { color: var(--text); text-decoration: none; }
 .site-header nav a:hover { color: var(--strong); }
 /* Current page is circled in pencil */
@@ -244,7 +251,7 @@ mark {
 /* Phones: photo sits above the name instead of beside it */
 @media (max-width: 520px) {
   .hello { flex-direction: column-reverse; align-items: flex-start; gap: 1.75rem; margin-top: .75rem; }
-  .photo { width: 9rem; margin-left: .5rem; transform: rotate(-2deg); }
+  .photo { width: 9rem; align-self: center; transform: rotate(-2deg); }
 }
 .post img { max-width: 100%; height: auto; }
 .post img.center { display: block; width: auto; margin-inline: auto; }
