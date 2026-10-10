@@ -52,7 +52,6 @@
       {%- for link in links %}
       <a href="{{ link[1] }}"{% if page.url == link[1] or (link[1] == "/blogs/" and page.url and page.url.startsWith("/blogs/")) %} aria-current="page"{% endif %}>{{ link[0] }}</a>
       {%- endfor %}
-      <a href="{{ site.resume }}" target="_blank" rel="noopener noreferrer">Resume</a>
       <button
         class="theme-toggle"
         x-data="{ dark: document.documentElement.dataset.theme ? document.documentElement.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches }"
@@ -73,7 +72,6 @@
       <a href="{{ site.github }}">GitHub</a>
       <a href="{{ site.linkedin }}">LinkedIn</a>
       <a href="mailto:{{ site.email }}">Email</a>
-      <a href="{{ site.resume }}" target="_blank" rel="noopener noreferrer">Resume</a>
     </div>
   </footer>
 </body>

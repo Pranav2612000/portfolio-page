@@ -8,7 +8,6 @@ export default {
   github: "https://github.com/Pranav2612000",
   linkedin: "https://www.linkedin.com/in/pranav-joglekar/",
   twitter: "@joglekar_pranav",
-  resume: "/pranav_joglekar_resume.pdf",
 
   // about: [
   //   `I am a Full Stack expert building an API first world at <a href="https://postman.com/">Postman</a>. I was introduced to the world of programming at the age of 13 through Scratch, (using which I created my first game) and I was enamoured by it. Since then, for the past 10 years, I've been tinkering with technology to craft beautiful websites, build awesome products and solve problems. I'm a hacker at heart - not building something makes me restless.`,
