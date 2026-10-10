@@ -33,6 +33,10 @@ layout: base.njk
   {%- endfor %}
 </ul>
 
-<div class="section-head" id="contact"><h2>Contact Me</h2></div>
-<p>{{ site.contact }}</p>
-<p><a class="email" href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+<script>
+  // Old links to /#contact open an email instead
+  if (location.hash === "#contact") {
+    history.replaceState(null, "", location.pathname);
+    location.href = "mailto:{{ site.email }}";
+  }
+</script>
