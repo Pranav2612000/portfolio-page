@@ -1,8 +1,15 @@
 ---
 layout: base.njk
 ---
-<h1>{{ site.name }}</h1>
-<p class="lead">{{ site.tagline }}</p>
+<div class="hello">
+  <div>
+    <h1>{{ site.name }}</h1>
+    <p class="lead">{{ site.tagline }}</p>
+  </div>
+  <figure class="taped taped-small photo">
+    <img src="/img/running.jpg" alt="Pranav running a marathon" width="320" height="346" fetchpriority="high">
+  </figure>
+</div>
 <div class="intro">
   {%- for paragraph in site.about %}
   <p>{{ paragraph | safe }}</p>
