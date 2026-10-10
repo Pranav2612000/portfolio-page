@@ -8,7 +8,7 @@ permalink: /experience/
 {%- for job in experience %}
 <section class="entry">
   <h2>{{ job.role }}, {% if job.url %}<a href="{{ job.url }}">{{ job.org }}</a>{% else %}{{ job.org }}{% endif %}</h2>
-  <p class="meta">{{ job.when }} · {{ job.place }}</p>
+  <p class="meta"><span class="note">{{ job.when }}</span><span class="note-sep"> · </span>{{ job.place }}</p>
   {% if job.points.length %}
   <ul>
     {%- for point in job.points %}

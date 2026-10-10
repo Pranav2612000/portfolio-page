@@ -154,6 +154,30 @@ ul.items .meta { display: block; }
 .entry .links { display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .875rem; }
 
 
+/* Margin notes: on wide screens, dates move into the left margin like notes beside the text */
+@media (min-width: 1180px) {
+  ul.dated li, ul.items li, .entry { position: relative; }
+  .note {
+    position: absolute;
+    top: 0;
+    right: calc(100% + 1.5rem);
+    width: 7.5rem;
+    margin: 0;
+    text-align: right;
+    white-space: normal;
+    font-family: var(--hand);
+    font-size: .95rem;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--meta);
+    transform: rotate(-2deg);
+  }
+  ul.dated .note { right: calc(100% + 2.6rem); }
+  /* Level with the job title on the Experience page */
+  .entry .note { top: .45rem; }
+  .note-sep { display: none; }
+}
+
 /* Blog post */
 .back { font-size: .85rem; margin-bottom: 1.5rem; }
 .post-image { display: block; width: 100%; height: auto; border-radius: 6px; margin-bottom: 2rem; }
