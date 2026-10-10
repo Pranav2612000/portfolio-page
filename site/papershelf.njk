@@ -1,0 +1,19 @@
+---
+layout: base.njk
+title: Papershelf | Pranav Joglekar
+description: Pranav Joglekar's Shelf. This contains papers read by Pranav
+# Hidden for now. Set back to /papershelf/ to show it again
+permalink: false
+eleventyExcludeFromCollections: true
+---
+<h1>Papershelf</h1>
+<p>A list of research papers, articles &amp; blogs I've enjoyed reading</p>
+<ul class="items">
+  {%- for paper in papers %}
+  <li>
+    <a href="{{ paper.url }}">{{ paper.name }}</a>
+    <span class="meta">{{ paper.description }}</span>
+    {% if paper.resources %}<span class="meta"><i>Supporting Resources</i>: {% for r in paper.resources %}<a href="{{ r.url }}">{{ r.name }}</a>{% endfor %}</span>{% endif %}
+  </li>
+  {%- endfor %}
+</ul>

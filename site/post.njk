@@ -1,0 +1,19 @@
+---
+layout: base.njk
+pagination:
+  data: posts
+  size: 1
+  alias: post
+permalink: "{{ post.url }}"
+eleventyComputed:
+  title: "{{ post.title }} | Pranav Joglekar"
+  description: "{{ post.description }}"
+  keywords: "{{ post.keywords }}"
+---
+<p class="back"><a href="/blogs/">← All posts</a></p>
+<h1>{{ post.title }}</h1>
+<p class="meta">by {{ site.name }} · <time datetime="{{ post.date | isoDate }}">{{ post.date | dayDate }}</time></p>
+{% if post.image %}<img class="post-image" src="{{ post.image }}" alt="{{ post.alt_img }}">{% endif %}
+<article class="post">
+  {{ post.html | safe }}
+</article>

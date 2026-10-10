@@ -1,0 +1,38 @@
+---
+layout: base.njk
+---
+<h1>{{ site.name }}</h1>
+<p class="lead">{{ site.tagline }}</p>
+<div class="intro">
+  {%- for paragraph in site.about %}
+  <p>{{ paragraph | safe }}</p>
+  {%- endfor %}
+</div>
+
+<div class="section-head"><h2>Blog</h2><a href="/blogs/">All posts</a></div>
+<ul class="dated">
+  {%- for post in posts | head(5) %}
+  <li><a href="{{ post.url }}">{{ post.title }}</a> <time datetime="{{ post.date | isoDate }}">{{ post.date | dayDate }}</time></li>
+  {%- endfor %}
+</ul>
+
+<div class="section-head"><h2>Projects</h2><a href="/projects/">All projects</a></div>
+<ul class="items">
+  {%- for project in projects %}{% if project.top %}
+  <li><a href="{{ project.url }}">{{ project.name }}</a><span class="meta">{{ project.summary }}</span></li>
+  {%- endif %}{% endfor %}
+</ul>
+
+<div class="section-head"><h2>Experience</h2><a href="/experience/">Full experience</a></div>
+<ul class="items">
+  {%- for job in experience | head(4) %}
+  <li>
+    <span class="strong">{{ job.role }},</span> {% if job.url %}<a href="{{ job.url }}">{{ job.org }}</a>{% else %}{{ job.org }}{% endif %}
+    <span class="meta">{{ job.when }} · {{ job.place }}</span>
+  </li>
+  {%- endfor %}
+</ul>
+
+<div class="section-head" id="contact"><h2>Contact Me</h2></div>
+<p>{{ site.contact }}</p>
+<p><a class="email" href="mailto:{{ site.email }}">{{ site.email }}</a></p>

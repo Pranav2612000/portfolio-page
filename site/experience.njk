@@ -1,0 +1,20 @@
+---
+layout: base.njk
+title: Experience | Pranav Joglekar
+description: Pranav Joglekar's Experience Page. See Pranav's work experience
+permalink: /experience/
+---
+<h1>Experience</h1>
+{%- for job in experience %}
+<section class="entry">
+  <h2>{{ job.role }}, {% if job.url %}<a href="{{ job.url }}">{{ job.org }}</a>{% else %}{{ job.org }}{% endif %}</h2>
+  <p class="meta">{{ job.when }} · {{ job.place }}</p>
+  {% if job.points.length %}
+  <ul>
+    {%- for point in job.points %}
+    <li>{{ point | safe }}</li>
+    {%- endfor %}
+  </ul>
+  {% endif %}
+</section>
+{%- endfor %}

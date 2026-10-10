@@ -1,0 +1,18 @@
+---
+layout: base.njk
+title: Projects | Pranav Joglekar
+description: Pranav Joglekar's Work Page. See Pranav's work and projects
+permalink: /projects/
+---
+<h1>Projects</h1>
+{%- for project in projects %}
+<section class="entry">
+  <h2>{% if project.url %}<a href="{{ project.url }}">{{ project.name }}</a>{% else %}{{ project.name }}{% endif %}</h2>
+  {%- for paragraph in project.description %}
+  {% if paragraph.startsWith("<ul>") %}{{ paragraph | safe }}{% else %}<p>{{ paragraph | safe }}</p>{% endif %}
+  {%- endfor %}
+  <p class="meta">{{ project.tech | join(" · ") }}</p>
+  <p class="links">{% for link in project.links %}<a href="{{ link.url }}">{{ link.name }}</a>{% endfor %}</p>
+</section>
+{%- endfor %}
+<p>See more <a href="{{ site.github }}?tab=repositories">Projects here</a></p>

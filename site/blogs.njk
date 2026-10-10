@@ -1,0 +1,15 @@
+---
+layout: base.njk
+title: Blogs | Pranav Joglekar
+description: Pranav Joglekar's Blogs Page. Read Articles written by Pranav Joglekar here
+permalink: /blogs/
+---
+<h1>Blog</h1>
+<ul class="items">
+  {%- for post in posts %}
+  <li>
+    <a href="{{ post.url }}">{{ post.title }}</a> <time datetime="{{ post.date | isoDate }}">{{ post.date | dayDate }}</time>
+    <span class="meta">{{ post.description }}</span>
+  </li>
+  {%- endfor %}
+</ul>
