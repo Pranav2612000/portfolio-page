@@ -14,7 +14,7 @@ eleventyComputed:
 <p class="back"><a href="/blogs/">← All posts</a></p>
 <h1>{{ post.title }}</h1>
 <p class="meta">by {{ site.name }} · <time datetime="{{ post.date | isoDate }}">{{ post.date | dayDate }}</time></p>
-{% if post.image %}<img class="post-image" src="{{ post.image }}" alt="{{ post.alt_img }}">{% endif %}
+{% if post.image %}<figure class="taped"><img class="post-image" src="{{ post.image }}" alt="{{ post.alt_img }}"></figure>{% endif %}
 <article class="post">
   {{ post.html | safe }}
 </article>
