@@ -16,10 +16,10 @@ export default [
     when: "Aug 2022 - Feb 2025",
     place: "Bengaluru, India",
     points: [
-      `Built <a href="https://learning.postman.com/docs/administration/managing-your-team/secret-scanner/">Postman's Secret Scanner</a> - a product which informs users when their passwords, tokens & secrets are leaked on Postman.  The scanner handles 200+ scans per second and has found more than 100,000 secrets till date.`,
+      `Built <a href="https://learning.postman.com/docs/administration/managing-your-team/secret-scanner/">Postman's Secret Scanner</a> - a product which informs users when their passwords, tokens & secrets are leaked on Postman.  The scanner handles 200+ scans per second and has found more than <mark>100,000 secrets</mark> till date.`,
       `Created <a href="https://learning.postman.com/docs/sending-requests/postman-vault/postman-vault-secrets/">Postman Vault</a> - A local first encrypted storage solution to store users API Keys & Authorizations tokens safely.`,
       `Worked with Azure, 1Password, AWS and HashiCorp teams to develop <a href="https://learning.postman.com/docs/sending-requests/postman-vault/postman-vault-integrations/">Postman Vault Integration</a> allowing users to use secrets stored in external sources`,
-      `These features are used by 100,000+ users and have brought in $1M+ ARR.`,
+      `These features are used by <mark>100,000+ users</mark> and have brought in <mark>$1M+ ARR</mark>.`,
       `Developed Client Side Scanner to scan entities for secrets locally in less than 10ms using WebAssembly.`,
     ],
   },
