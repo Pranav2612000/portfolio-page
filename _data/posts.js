@@ -1,11 +1,11 @@
-// Reads the blog posts from ../src/posts and turns them into HTML
+// Reads the blog posts from posts/ and turns them into HTML
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import markdownIt from "markdown-it";
 import hljs from "highlight.js";
 
-const POSTS_DIR = path.resolve("../src/posts");
+const POSTS_DIR = path.resolve("posts");
 
 const md = markdownIt({
   html: true,

@@ -2,12 +2,9 @@ const SITE_URL = "https://pranavjoglekarcodes.web.app";
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 export default function (eleventyConfig) {
-  // Old Gatsby static folder (resume, post images) is served from the site root
-  eleventyConfig.addPassthroughCopy({ "../static": "/" });
-  eleventyConfig.addPassthroughCopy({ "../public/robots.txt": "robots.txt" });
-  eleventyConfig.addPassthroughCopy({ "../src/assets/favicon.ico": "favicon.ico" });
-  eleventyConfig.addPassthroughCopy({ "../src/assets/MugshotCard.jpg": "img/MugshotCard.jpg" });
-  eleventyConfig.addPassthroughCopy({ "../src/posts": "blogs/posts" }, {
+  // Files in static/ (favicon, resume, post images, robots.txt) are served from the site root
+  eleventyConfig.addPassthroughCopy({ static: "/" });
+  eleventyConfig.addPassthroughCopy({ posts: "blogs/posts" }, {
     filter: ["**/*.png", "**/*.jpg", "**/*.jpeg", "**/*.webp"],
   });
   eleventyConfig.addPassthroughCopy("css");
