@@ -18,7 +18,7 @@ layout: base.njk
 
 <div class="section-head"><h2>Blog</h2><a href="/blogs/">All posts</a></div>
 <ul class="dated">
-  {%- set featured = ["buildingAVPNFromScratch", "incident_of_indolent_otps", "gitTricks1"] %}
+  {%- set featured = ["learningsFromBuildingAnObjectStoreDatabase", "buildingAVPNFromScratch", "incident_of_indolent_otps", "gitTricks1"] %}
   {%- for post in posts %}{% if post.id in featured %}
   <li><a href="{{ post.url }}">{{ post.title }}</a> <time class="note" datetime="{{ post.date | isoDate }}">{{ post.date | dayDate }}</time></li>
   {%- endif %}{% endfor %}

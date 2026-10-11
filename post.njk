@@ -7,9 +7,9 @@ pagination:
   addAllPagesToCollections: true
 permalink: "{{ post.url }}"
 eleventyComputed:
-  title: "{{ post.title }} | Pranav Joglekar"
-  description: "{{ post.description }}"
-  keywords: "{{ post.keywords }}"
+  title: "{{ post.title | safe }} | Pranav Joglekar"
+  description: "{{ post.description | safe }}"
+  keywords: "{{ post.keywords | safe }}"
 ---
 <p class="back"><a href="/blogs/">← All posts</a></p>
 <h1>{{ post.title }}</h1>
